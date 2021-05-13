@@ -210,14 +210,14 @@ export default {
 }
 
 .retail_background {
-  background-image: url('../assets/images/background-image-individual.png');
+  background-image: url('../assets/images/background-image-individual.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .corporate_background {
-  background-image: url('../assets/images/corporate-background-image.png');
+  background-image: url('../assets/images/corporate-background-image.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

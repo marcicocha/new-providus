@@ -28,7 +28,7 @@
   }
   &__background {
     height: 40%;
-    background-image: url('../assets/images/background-image-individual.png');
+    background-image: url('../assets/images/background-image-individual.jpg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
