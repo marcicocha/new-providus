@@ -34,7 +34,7 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '@/plugins/antd-ui',
-    { src: '~/plugins/loadScript.js', ssr: false },
+    { src: '@/plugins/loadScript.js', ssr: false },
   ],
 
   // Static Build Configuration for Yarn Generate
