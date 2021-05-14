@@ -80,11 +80,12 @@ export default {
         this.isBasicDetails = true
       }
     },
-    async kinsContactDetailsHandler() {
+    async kinsContactDetailsHandler(obj) {
       try {
         const response = this.$cookies.get('requestId')
         const kinInfoObject = {
           ...this.kinInfoObject,
+          ...obj,
           requestId: response,
         }
         await this.$axios.$put('/individual/kinDetails', kinInfoObject)
