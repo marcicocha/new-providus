@@ -131,10 +131,22 @@ export default {
   },
   data() {
     return {
-      kinObject: {
-        ...this.kinInfoObject,
-      },
+      kinObject: {},
     }
+  },
+  watch: {
+    kinInfoObject: {
+      handler(newKinInfoObject) {
+        if (!newKinInfoObject) {
+          return
+        }
+        this.kinObject = {
+          ...newKinInfoObject,
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods: {
     kinDetailsHandler() {

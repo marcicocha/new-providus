@@ -154,6 +154,20 @@ export default {
       },
     }
   },
+  watch: {
+    personalInfoObject: {
+      handler(newPersonalInfoObject) {
+        if (!newPersonalInfoObject) {
+          return
+        }
+        this.basicInformationObject = {
+          ...newPersonalInfoObject,
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+  },
   methods: {
     submitBasicInformationHandler() {
       if (

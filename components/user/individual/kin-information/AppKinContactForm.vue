@@ -138,10 +138,22 @@ export default {
   },
   data() {
     return {
-      kinContactObject: {
-        ...this.kinInfoObject,
-      },
+      kinContactObject: {},
     }
+  },
+  watch: {
+    kinInfoObject: {
+      handler(newKinInfoObject) {
+        if (!newKinInfoObject) {
+          return
+        }
+        this.kinContactObject = {
+          ...newKinInfoObject,
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods: {
     kinsContactDetailsHandler() {

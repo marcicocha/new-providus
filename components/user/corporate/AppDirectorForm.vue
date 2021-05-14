@@ -89,10 +89,22 @@ export default {
   },
   data() {
     return {
-      directorObject: {
-        ...this.directorDetailsObject,
-      },
+      directorObject: {},
     }
+  },
+  watch: {
+    directorDetailsObject: {
+      handler(newDirectorDetailsObject) {
+        if (!newDirectorDetailsObject) {
+          return
+        }
+        this.directorObject = {
+          ...newDirectorDetailsObject,
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods: {
     validationHandler() {

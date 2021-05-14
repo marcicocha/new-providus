@@ -142,10 +142,22 @@ export default {
   },
   data() {
     return {
-      nationalityInfoObject: {
-        ...this.nationalityObject,
-      },
+      nationalityInfoObject: {},
     }
+  },
+  watch: {
+    nationalityObject: {
+      handler(newNationalityObject) {
+        if (!newNationalityObject) {
+          return
+        }
+        this.nationalityInfoObject = {
+          ...newNationalityObject,
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods: {
     submitNationalityInfoHandler() {

@@ -90,10 +90,22 @@ export default {
   },
   data() {
     return {
-      proprietorObject: {
-        ...this.proprietorDetailsObject,
-      },
+      proprietorObject: {},
     }
+  },
+  watch: {
+    proprietorDetailsObject: {
+      handler(newProprietorDetailsObject) {
+        if (!newProprietorDetailsObject) {
+          return
+        }
+        this.proprietorObject = {
+          ...newProprietorDetailsObject,
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods: {
     validationHandler() {

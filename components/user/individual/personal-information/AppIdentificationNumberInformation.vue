@@ -41,10 +41,22 @@ export default {
   },
   data() {
     return {
-      localPersonInfoObject: {
-        ...this.personalInfoObject,
-      },
+      localPersonInfoObject: {},
     }
+  },
+  watch: {
+    personalInfoObject: {
+      handler(newPersonalInfoObject) {
+        if (!newPersonalInfoObject) {
+          return
+        }
+        this.localPersonInfoObject = {
+          ...newPersonalInfoObject,
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
   },
   methods: {
     submitIdentificationInfoHandler() {
