@@ -98,8 +98,9 @@
   </div>
 </template>
 <script>
-import AppButton from '@/components/UI/AppButton'
 import { mapActions } from 'vuex'
+import { notification } from 'ant-design-vue'
+import AppButton from '@/components/UI/AppButton'
 
 export default {
   name: 'AppLivenessCheck',
@@ -121,10 +122,12 @@ export default {
       }
     },
   },
-  mounted() {
-    this.loading = false
-    this.$loadScript('https://webrtc.github.io/adapter/adapter-latest.js')
-      .then(() => {
+  async mounted() {
+    try {
+      this.loading = false
+      this.$loadScript(
+        'https://webrtc.github.io/adapter/adapter-latest.js'
+      ).then(() => {
         this.loading = false
         this.$loadScript('/daon/daon.js').then(() => {
           this.$loadScript('/daon/3dfl/labels.js').then(() => {
@@ -147,44 +150,52 @@ export default {
           })
         })
       })
-      .catch((err) => {
-        // Failed to fetch script
-        this.loading = false
-        let errorMessage = 'Network Error'
-        // Error Message from Backend
-        if (err && !err.response) {
-          errorMessage = String(err)
-          this.$toast.open({
-            message: `<p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
-          })
-          return
-        }
-        // eslint-disable-next-line no-prototype-builtins
-        if (err && err.hasOwnProperty('response')) {
-          const res = err.response
-          // eslint-disable-next-line no-prototype-builtins
-          if (res.hasOwnProperty('data')) {
-            errorMessage = res.data.errorMessage
-            if (!errorMessage) {
-              errorMessage =
-                'No response was received from the server...please try again'
-            }
-          } else {
-            errorMessage =
-              'No response was received from the server...please try again'
-          }
-
-          this.$toast.open({
-            message: `<p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
-          })
-        }
+    } catch (err) {
+      // Failed to fetch script
+      this.loading = false
+      const { default: errorHandler } = await import('@/utils/errorHandler')
+      errorHandler(err).forEach((msg) => {
+        notification.error({
+          message: 'Error',
+          description: msg,
+          duration: 0,
+        })
       })
+      // let errorMessage = 'Network Error'
+      // Error Message from Backend
+      // if (err && !err.response) {
+      //   errorMessage = String(err)
+      //   this.$toast.open({
+      //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
+      //     type: 'error',
+      //     duration: 4000,
+      //     dismissible: true,
+      //   })
+      //   return
+      // }
+      // eslint-disable-next-line no-prototype-builtins
+      // if (err && err.hasOwnProperty('response')) {
+      //   const res = err.response
+      //   // eslint-disable-next-line no-prototype-builtins
+      //   if (res.hasOwnProperty('data')) {
+      //     errorMessage = res.data.errorMessage
+      //     if (!errorMessage) {
+      //       errorMessage =
+      //         'No response was received from the server...please try again'
+      //     }
+      //   } else {
+      //     errorMessage =
+      //       'No response was received from the server...please try again'
+      //   }
+
+      //   this.$toast.open({
+      //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
+      //     type: 'error',
+      //     duration: 4000,
+      //     dismissible: true,
+      //   })
+      // }
+    }
   },
   methods: {
     livenessCheckHandler() {
@@ -216,12 +227,10 @@ export default {
           errorMessage = String(err)
           const customMessage =
             'please click the start session button to try again'
-          this.$toast.open({
-            message: `<p class="toast-title">${errorMessage} </p>
-                    <p class="toast-msg"> ${customMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+          notification.error({
+            message: errorMessage,
+            description: customMessage,
+            duration: 0,
           })
           document.getElementById('videocontainer').style.opacity = '0.04'
           document.getElementById('videocontainer').style.color = '#ed143d'
@@ -244,11 +253,10 @@ export default {
               'No response was received from the server...please try again'
           }
 
-          this.$toast.open({
-            message: `<p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+          notification.error({
+            message: 'Error',
+            description: errorMessage,
+            duration: 0,
           })
         }
       }

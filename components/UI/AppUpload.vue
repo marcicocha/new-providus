@@ -26,6 +26,8 @@
   </div>
 </template>
 <script>
+import { notification } from 'ant-design-vue'
+
 export default {
   name: 'AppUpload',
   props: {
@@ -77,19 +79,17 @@ export default {
         this.$emit('fileUploadHandler', this.file)
       } else if (file.size > 3145728) {
         this.file = null
-        this.$toast.open({
-          message: `<p class="toast-msg"> Input File must not be Larger than 635KB' </p>`,
-          type: 'error',
-          duration: 4000,
-          dismissible: true,
+        notification.error({
+          message: 'Error',
+          description: 'Input File must not be Larger than 635KB',
+          duration: 0,
         })
       } else if (!extensionStatus) {
         this.file = null
-        this.$toast.open({
-          message: `<p class="toast-msg"> You can only upload ${this.extension.toString()} file </p>`,
-          type: 'error',
-          duration: 4000,
-          dismissible: true,
+        notification.error({
+          message: 'Error',
+          description: `You can only upload ${this.extension.toString()} file`,
+          duration: 0,
         })
       }
     },

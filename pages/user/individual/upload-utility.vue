@@ -69,26 +69,14 @@ export default {
         )
         this.$router.replace('/user/individual/upload-document')
       } catch (err) {
-        let errorMessage = ''
-        // this.message = err.response.data.errorMessage
-        if (String(err).includes('Network')) {
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
           notification.error({
             message: 'Error',
-            description: 'Network Error',
+            description: msg,
             duration: 0,
           })
-          return
-        }
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-          notification.error({
-            message: 'Error',
-            description: errorMessage,
-            duration: 0,
-          })
-        }
+        })
       }
     },
     capturePageHandler() {

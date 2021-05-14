@@ -53,8 +53,8 @@
             placeholder="Enter Bank Verification Number"
             :disabled="isLoading"
             is-number
-            max-length="11"
-            min-length="11"
+            :max-length="11"
+            :min-length="11"
           />
           <div style="height: 20px"></div>
           <AppButton
@@ -232,21 +232,14 @@ export default {
         )
         this.$cookies.set('personalDetails', individualResponse.response)
       } catch (err) {
-        let errorMessage = 'Network Error'
-
-        // Error Message from Backend
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
           notification.error({
             message: 'Error',
-            description: errorMessage,
-            type: 'error',
+            description: msg,
             duration: 0,
           })
-        }
+        })
       }
     },
     async bvnValidationHandler() {
@@ -256,25 +249,20 @@ export default {
         this.accountInformation.BVN === ''
       ) {
         this.message = 'BVN field is required to proceed,'
-        this.$toast.open({
-          message: `<p class="toast-title">BVN Validation Message</p>
-                    <p class="toast-msg"> ${this.message} </p>`,
-          type: 'error',
-          duration: 4000,
-          dismissible: true,
+        notification.error({
+          message: 'BVN Validation Message',
+          description: this.message,
+          duration: 0,
         })
         return
       }
 
       if (this.accountInformation.BVN.length !== 11) {
         this.message = 'BVN length should be 11'
-
-        this.$toast.open({
-          message: `<p class="toast-title">BVN Validation Message</p>
-                    <p class="toast-msg"> ${this.message} </p>`,
-          type: 'error',
-          duration: 4000,
-          dismissible: true,
+        notification.error({
+          message: 'BVN Validation Message',
+          description: this.message,
+          duration: 0,
         })
         return
       }
@@ -297,37 +285,16 @@ export default {
       } catch (err) {
         this.isLoading = false
         this.fetching = false
-
-        let errorMessage = 'Network Error'
-
-        // Network Error
-        if (String(err).includes('Network')) {
-          errorMessage = err
-          this.$toast.open({
-            message: `<p class="toast-title">Error Message</p>
-                    <p class="toast-msg"> Network Error </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+        let error
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 0,
           })
-          return
-        }
-
-        const error = err.response.data.errorMessage
-
-        // Application already completed with BVN entered
-        if (String(error).toLowerCase().includes('already completed')) {
-          errorMessage = error
-          this.$toast.open({
-            message: `<p class="toast-title">Registration Status</p>
-                    <p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'info',
-            duration: 4000,
-            dismissible: true,
-          })
-          return
-        }
-
+          error = msg
+        })
         // BVN Already Exists
         if (error.includes('already exist')) {
           const { response } = await this.$axios.$get(
@@ -360,22 +327,6 @@ export default {
           if (nextWorkFlow === 'LIVENESS_CHECK') {
             this.$router.replace('/user/individual/liveness-check')
           }
-          return
-        }
-
-        // Error Message from Backend
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-
-          this.$toast.open({
-            message: `<p class="toast-title">Error Message</p>
-                    <p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
-          })
           return
         }
 

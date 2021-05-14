@@ -119,39 +119,14 @@ export default {
         await this.$axios.$post('/individual/idCardUpload', formData, config)
         this.$router.replace('/user/individual/upload-utility')
       } catch (err) {
-        let errorMessage = 'Network Error'
-        if (String(err).includes('Network')) {
-          errorMessage = err
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
           notification.error({
             message: 'Error',
-            description: 'Network Error',
+            description: msg,
             duration: 0,
           })
-          return
-        }
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-          const validationError = res.data.fieldValidationErrors
-            ? res.data.fieldValidationErrors
-            : []
-          if (validationError === [] || !validationError) {
-            notification.error({
-              message: 'Error',
-              description: errorMessage,
-              duration: 0,
-            })
-            return
-          }
-          validationError.forEach((element) => {
-            notification.error({
-              message: 'Error',
-              description: element.message,
-              duration: 0,
-            })
-          })
-        }
+        })
       }
     },
     validationHandler() {

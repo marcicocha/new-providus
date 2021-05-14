@@ -21,6 +21,7 @@
   </div>
 </template>
 <script>
+import { notification } from 'ant-design-vue'
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
 import AppInput from '@/components/UI/AppInput'
 import AppButton from '@/components/UI/AppButton'
@@ -50,22 +51,14 @@ export default {
         }
       } catch (err) {
         this.isLoading = false
-        let errorMessage = 'Network Error'
-
-        // Error Message from Backend
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-
-          this.$toast.open({
-            message: `<p class="toast-title">Error Message</p>
-                    <p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 0,
           })
-        }
+        })
       }
     },
   },

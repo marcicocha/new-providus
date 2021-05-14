@@ -109,7 +109,7 @@
   </div>
 </template>
 <script>
-import { Row, Col, Form } from 'ant-design-vue'
+import { Row, Col, Form, notification } from 'ant-design-vue'
 import AppInput from '@/components/UI/AppInput'
 import AppSelect from '@/components/UI/AppSelect'
 import AppButton from '@/components/UI/AppButton'
@@ -199,13 +199,10 @@ export default {
         if (this.kinObject.bvn.length < 11) {
           this.message =
             'The BVN entered is incomplete. BVN length should be 11'
-
-          this.$toast.open({
-            message: `<p class="toast-title">BVN Validation Message</p>
-                    <p class="toast-msg"> ${this.message} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+          notification.error({
+            message: 'BVN Validation Message',
+            description: this.message,
+            duration: 0,
           })
           return
         }

@@ -45,6 +45,7 @@
   </div>
 </template>
 <script>
+import { notification } from 'ant-design-vue'
 import AppButton from '@/components/UI/AppButton'
 
 export default {
@@ -57,9 +58,11 @@ export default {
       loading: true,
     }
   },
-  mounted() {
-    this.$loadScript('https://webrtc.github.io/adapter/adapter-latest.js')
-      .then(() => {
+  async mounted() {
+    try {
+      this.$loadScript(
+        'https://webrtc.github.io/adapter/adapter-latest.js'
+      ).then(() => {
         this.loading = false
         this.$loadScript('/daon/face/faceCapture.min.js').then(() => {
           this.$loadScript('/daon/face/auto.js').then(() => {
@@ -69,55 +72,41 @@ export default {
           })
         })
       })
-      .catch((err) => {
-        // Failed to fetch script
-        this.loading = false
-        let errorMessage = 'Network Error'
-
-        // Error Message from Backend
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-
-          this.$toast.open({
-            message: `<p class="toast-title">Error Message</p>
-                    <p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
-          })
-        }
+    } catch (err) {
+      // Failed to fetch script
+      this.loading = false
+      const { default: errorHandler } = await import('@/utils/errorHandler')
+      errorHandler(err).forEach((msg) => {
+        notification.error({
+          message: 'Error',
+          description: msg,
+          duration: 0,
+        })
       })
+    }
   },
-  beforeDestroy() {
-    this.$unloadScript('https://webrtc.github.io/adapter/adapter-latest.js')
-      .then(() => {
+  async beforeDestroy() {
+    try {
+      this.$unloadScript(
+        'https://webrtc.github.io/adapter/adapter-latest.js'
+      ).then(() => {
         this.loading = false
         this.$unloadScript('/daon/face/faceCapture.min.js').then(() => {
           this.$unloadScript('/daon/face/auto.js').then(() => {})
         })
       })
-      .catch((err) => {
-        // Failed to fetch script
-        this.loading = false
-        let errorMessage = 'Network Error'
-
-        // Error Message from Backend
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-
-          this.$toast.open({
-            message: `<p class="toast-title">Error Message</p>
-                    <p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
-          })
-        }
+    } catch (err) {
+      // Failed to fetch script
+      this.loading = false
+      const { default: errorHandler } = await import('@/utils/errorHandler')
+      errorHandler(err).forEach((msg) => {
+        notification.error({
+          message: 'Error',
+          description: msg,
+          duration: 0,
+        })
       })
+    }
   },
   methods: {
     submitCaptureHandler() {

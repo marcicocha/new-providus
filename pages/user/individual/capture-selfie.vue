@@ -15,6 +15,7 @@
   </div>
 </template>
 <script>
+import { notification } from 'ant-design-vue'
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
 import AppCaptureInstruction from '@/components/user/individual/capture/AppCaptureInstruction'
 import AppCaptureSelfie from '@/components/user/individual/capture/AppCaptureSelfie.vue'
@@ -53,39 +54,47 @@ export default {
         this.$router.replace('/user/individual/personal-information')
       } catch (err) {
         this.formLoading = false
-        let errorMessage = 'Network Error'
-        if (err && !err.response) {
-          errorMessage = String(err) + '...please try again'
-          this.$toast.open({
-            message: `<p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 0,
           })
-          return
-        }
+        })
+        // let errorMessage = 'Network Error'
+        // if (err && !err.response) {
+        //   errorMessage = String(err) + '...please try again'
+        //   this.$toast.open({
+        //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
+        //     type: 'error',
+        //     duration: 4000,
+        //     dismissible: true,
+        //   })
+        //   return
+        // }
         // eslint-disable-next-line no-prototype-builtins
-        if (err && err.hasOwnProperty('response')) {
-          const res = err.response
-          // eslint-disable-next-line no-prototype-builtins
-          if (res.hasOwnProperty('data')) {
-            errorMessage = res.data.errorMessage
-            if (!errorMessage) {
-              errorMessage =
-                'No response was received from the server...please try again'
-            }
-          } else {
-            errorMessage =
-              'No response was received from the server...please try again'
-          }
+        // if (err && err.hasOwnProperty('response')) {
+        //   const res = err.response
+        //   // eslint-disable-next-line no-prototype-builtins
+        //   if (res.hasOwnProperty('data')) {
+        //     errorMessage = res.data.errorMessage
+        //     if (!errorMessage) {
+        //       errorMessage =
+        //         'No response was received from the server...please try again'
+        //     }
+        //   } else {
+        //     errorMessage =
+        //       'No response was received from the server...please try again'
+        //   }
 
-          this.$toast.open({
-            message: `<p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
-          })
-        }
+        //   this.$toast.open({
+        //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
+        //     type: 'error',
+        //     duration: 4000,
+        //     dismissible: true,
+        //   })
+        // }
       }
     },
   },

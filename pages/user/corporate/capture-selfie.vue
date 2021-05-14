@@ -14,6 +14,7 @@
   </div>
 </template>
 <script>
+import { notification } from 'ant-design-vue'
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
 import AppCaptureInstruction from '@/components/user/individual/capture/AppCaptureInstruction'
 import AppCaptureSelfie from '@/components/user/individual/capture/AppCaptureSelfie.vue'
@@ -50,18 +51,14 @@ export default {
         this.$router.replace('/user/corporate/upload-document')
       } catch (err) {
         this.formLoading = false
-        let errorMessage = 'Network Error'
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-          this.$toast.open({
-            message: `<p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 0,
           })
-        }
+        })
       }
     },
   },

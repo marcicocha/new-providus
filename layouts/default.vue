@@ -62,6 +62,7 @@
 <script>
 import { isBrowser } from 'browser-or-node'
 import { mapState } from 'vuex'
+import { notification } from 'ant-design-vue'
 import AppLoader from '@/components/UI/AppLoader.vue'
 
 export default {
@@ -104,11 +105,13 @@ export default {
     this.$cookies.removeAll()
   },
   methods: {
-    initLoader() {
-      const root = document.querySelector('html')
-      root.classList.add('hide-scroller')
-      this.$loadScript('https://webrtc.github.io/adapter/adapter-latest.js')
-        .then(() => {
+    async initLoader() {
+      try {
+        const root = document.querySelector('html')
+        root.classList.add('hide-scroller')
+        this.$loadScript(
+          'https://webrtc.github.io/adapter/adapter-latest.js'
+        ).then(() => {
           this.loading = false
           this.$loadScript('/daon/daon.js').then(() => {
             setTimeout(() => {
@@ -123,26 +126,18 @@ export default {
             }, 3000)
           })
         })
-        .catch((err) => {
-          // Failed to fetch script
-          this.loading = false
-          let errorMessage = ''
-
-          // Error Message from Backend
-          // eslint-disable-next-line no-prototype-builtins
-          if (err.hasOwnProperty('response')) {
-            const res = err.response
-            errorMessage = res.data.errorMessage
-
-            this.$toast.open({
-              message: `<p class="toast-title">Error Message</p>
-                    <p class="toast-msg"> ${errorMessage} </p>`,
-              type: 'error',
-              duration: 4000,
-              dismissible: true,
-            })
-          }
+      } catch (err) {
+        // Failed to fetch script
+        this.loading = false
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 0,
+          })
         })
+      }
     },
     goHome() {
       this.$router.push('/')

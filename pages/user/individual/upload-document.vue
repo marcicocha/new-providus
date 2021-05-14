@@ -29,6 +29,7 @@
   </div>
 </template>
 <script>
+import { notification } from 'ant-design-vue'
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
 import AppUpload from '@/components/UI/AppUpload'
 import AppButton from '@/components/UI/AppButton'
@@ -77,32 +78,29 @@ export default {
     },
     async submitDocumentHandler() {
       if (!this.signatureFile) {
-        this.$toast.open({
-          message: `<p class="toast-msg"> Signature File is Compulsory </p>`,
-          type: 'error',
-          duration: 4000,
-          dismissible: true,
+        notification.error({
+          message: 'Error',
+          description: 'Signature File is Compulsory',
+          duration: 0,
         })
         return
       }
       const response = this.$cookies.get('accountType')
       if (response === 'CURRENT') {
         if (!this.referenceFile1) {
-          this.$toast.open({
-            message: `<p class="toast-msg"> Reference File 1 is Mandatory </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+          notification.error({
+            message: 'Error',
+            description: 'Reference File 1 is Mandatory',
+            duration: 0,
           })
           return
         }
 
         if (!this.referenceFile2) {
-          this.$toast.open({
-            message: `<p class="toast-msg"> Reference File 2 is Mandatory </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+          notification.error({
+            message: 'Error',
+            description: 'Reference File 2 is Mandatory',
+            duration: 0,
           })
           return
         }
@@ -128,29 +126,14 @@ export default {
         this.loading = false
       } catch (err) {
         this.loading = false
-        let errorMessage = 'Network Error'
-        if (String(err).includes('Network')) {
-          errorMessage = err
-          this.$toast.open({
-            message: `<p class="toast-title">Error Message</p>
-                    <p class="toast-msg"> Network Error </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 0,
           })
-          return
-        }
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-          this.$toast.open({
-            message: `<p class="toast-msg"> ${errorMessage} </p>`,
-            type: 'error',
-            duration: 4000,
-            dismissible: true,
-          })
-        }
+        })
       }
     },
   },
