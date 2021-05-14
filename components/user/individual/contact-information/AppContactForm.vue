@@ -16,8 +16,8 @@
             label="Phone Number"
             placeholder="Enter Number"
             is-phone
-            max-length="15"
-            min-length="7"
+            :max-length="15"
+            :min-length="7"
           />
         </a-col>
         <a-col :span="12">

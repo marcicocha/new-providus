@@ -98,8 +98,8 @@
             label="BVN"
             placeholder="Enter Bank Verification Number"
             is-number
-            max-length="11"
-            min-length="11"
+            :max-length="11"
+            :min-length="11"
           />
         </a-col>
       </a-row>

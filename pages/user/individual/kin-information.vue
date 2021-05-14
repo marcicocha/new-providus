@@ -42,9 +42,9 @@ export default {
   },
   mounted() {
     const {
-      houseNo,
+      // houseNo,
       landmark,
-      streetName,
+      // streetName,
       residentCity,
       saveAddress,
       // residentState,
@@ -53,9 +53,9 @@ export default {
     if (saveAddress) {
       this.kinInfoObject = {
         ...this.kinInfoObject,
-        houseNo,
+        // houseNo,
         landMark: landmark,
-        streetName,
+        // streetName,
         city: residentCity,
         // residentState,
         // residentLga,
