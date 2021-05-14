@@ -37,7 +37,6 @@
   }
   &__content {
     position: relative;
-    height: 55%;
     .mobile_footer {
       // position: absolute;
       // bottom: 0;
