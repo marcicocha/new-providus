@@ -4,7 +4,7 @@
   border: 1px solid #eaeaea;
   width: 100%;
   margin-bottom: 10px;
-  height: 60px;
+  // height: 60px;
 }
 .ant-select-selection {
   border: none !important;
@@ -25,7 +25,12 @@
 .ant-input {
   padding: 4px 10px !important;
 }
-
+.ant-form-item {
+  margin-bottom: 0 !important;
+}
+.ant-form-item-control {
+  line-height: 1.5 !important;
+}
 input,
 input::before,
 input::after {

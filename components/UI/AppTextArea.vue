@@ -39,6 +39,14 @@ export default {
       type: String,
       default: 'default',
     },
+    wrapperCol: {
+      type: Object,
+      default: () => {},
+    },
+    labelCol: {
+      type: Object,
+      default: () => {},
+    },
     label: {
       type: String,
       default: '',
@@ -100,16 +108,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.full-input {
-  display: inline-block;
-  padding: 5px 10px;
-  border: 1px solid #eaeaea;
-  width: 100%;
-  margin-bottom: 15px;
-}
-label {
-  font-family: 'GothamThin', sans-serif;
-}
 textarea {
   outline: none;
   border: none;
@@ -120,13 +118,7 @@ textarea {
   font-size: 16px;
   line-height: 150%;
   color: #2e434e;
-  padding: 2px 1px;
   width: 100%;
-}
-@media only screen and (max-width: 600px) {
-  label {
-    font-size: 10px !important;
-  }
 }
 @media only screen and (max-width: 991px) {
   textarea {
