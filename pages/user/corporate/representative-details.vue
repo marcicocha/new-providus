@@ -120,20 +120,14 @@ export default {
         )
         this.$cookies.set('requestId', response.requestId)
       } catch (err) {
-        let errorMessage = 'Network Error'
-
-        // Error Message from Backend
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
           notification.error({
             message: 'Error',
-            description: errorMessage,
+            description: msg,
             duration: 0,
           })
-        }
+        })
       }
     },
     async rcValidationHandler() {
@@ -160,33 +154,16 @@ export default {
         this.isLoading = false
       } catch (err) {
         this.isLoading = false
-
-        let errorMessage = 'Network Error'
-
-        // Network Error
-        if (String(err).includes('Network')) {
-          errorMessage = err
+        let error
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
           notification.error({
             message: 'Error',
-            description: 'Network Error',
+            description: msg,
             duration: 0,
           })
-          return
-        }
-
-        const error = err.response.data.errorMessage
-
-        // Application already completed with RC entered
-        if (String(error).toLowerCase().includes('already completed')) {
-          errorMessage = error
-          notification.error({
-            message: 'Registration Status',
-            description: errorMessage,
-            duration: 0,
-          })
-          return
-        }
-
+          error = msg
+        })
         // BVN Already Exists
         if (error.includes('already exist')) {
           const { response } = await this.$axios.$get(
@@ -208,20 +185,6 @@ export default {
           if (nextWorkFlow === 'UPLOADS') {
             this.$router.replace('/user/corporate/upload-document')
           }
-          return
-        }
-
-        // Error Message from Backend
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-
-          notification.error({
-            message: 'Error',
-            description: errorMessage,
-            duration: 0,
-          })
         }
       }
     },
@@ -240,6 +203,14 @@ export default {
         this.loading = false
       } catch (err) {
         this.loading = false
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 0,
+          })
+        })
       }
     },
     validationHandler() {

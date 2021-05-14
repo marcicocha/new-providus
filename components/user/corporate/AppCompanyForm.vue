@@ -107,31 +107,15 @@ export default {
         this.$cookies.remove('representativeDetails')
       } catch (err) {
         this.loading = false
-        this.message = err.response.data.errorMessage
-        let errorMessage = 'Network Error'
-        // eslint-disable-next-line no-prototype-builtins
-        if (err.hasOwnProperty('response')) {
-          const res = err.response
-          errorMessage = res.data.errorMessage
-          const validationError = res.data.fieldValidationErrors
-            ? res.data.fieldValidationErrors
-            : []
-          if (validationError === [] || !validationError) {
-            notification.error({
-              message: 'Error Message',
-              description: errorMessage,
-              duration: 0,
-            })
-            return
-          }
-          validationError.forEach((element) => {
-            notification.error({
-              message: 'Error',
-              description: element.message,
-              duration: 0,
-            })
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 0,
           })
-        }
+        })
+        this.message = err.response.data.errorMessage
       }
     },
     validationHandler() {
