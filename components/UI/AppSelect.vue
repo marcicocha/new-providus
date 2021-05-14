@@ -221,15 +221,6 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.full-input {
-  display: inline-block;
-  padding: 5px 0;
-  border: 1px solid #eaeaea;
-  width: 100%;
-  margin-bottom: 10px;
-  height: 60px;
-}
-
 @media only screen and (min-width: 1536px) {
   @media only screen and (min-height: 730px) {
     select {
