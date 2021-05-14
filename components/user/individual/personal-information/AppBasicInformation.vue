@@ -46,6 +46,7 @@
             placeholder="Middle Name"
             is-text
             :max-length="30"
+            disabled
           />
         </a-col>
         <a-col :span="12">
