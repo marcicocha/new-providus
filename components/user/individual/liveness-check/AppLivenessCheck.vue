@@ -158,7 +158,7 @@ export default {
         notification.error({
           message: 'Error',
           description: msg,
-          duration: 0,
+          duration: 4000,
         })
       })
       // let errorMessage = 'Network Error'
@@ -230,7 +230,7 @@ export default {
           notification.error({
             message: errorMessage,
             description: customMessage,
-            duration: 0,
+            duration: 4000,
           })
           document.getElementById('videocontainer').style.opacity = '0.04'
           document.getElementById('videocontainer').style.color = '#ed143d'
@@ -256,7 +256,7 @@ export default {
           notification.error({
             message: 'Error',
             description: errorMessage,
-            duration: 0,
+            duration: 4000,
           })
         }
       }

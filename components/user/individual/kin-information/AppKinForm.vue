@@ -214,7 +214,7 @@ export default {
           notification.error({
             message: 'BVN Validation Message',
             description: this.message,
-            duration: 0,
+            duration: 4000,
           })
           return
         }

@@ -124,7 +124,7 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 0,
+            duration: 4000,
           })
         })
       }
@@ -137,7 +137,7 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Expiry date is Compulsory',
-          duration: 0,
+          duration: 4000,
         })
         return true
       }
@@ -148,7 +148,7 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Issue Date is Compulsory',
-          duration: 0,
+          duration: 4000,
         })
         return true
       }
@@ -159,7 +159,7 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Expiry Date should be greater than Issued date',
-          duration: 0,
+          duration: 4000,
         })
         return true
       }
@@ -167,7 +167,7 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Issue Date should be less than current Date',
-          duration: 0,
+          duration: 4000,
         })
         return true
       }
@@ -175,7 +175,7 @@ export default {
         notification.error({
           message: 'Error',
           description: 'ExpiryDate should be greater than current Date',
-          duration: 0,
+          duration: 4000,
         })
         return true
       }

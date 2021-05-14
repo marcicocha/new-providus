@@ -70,7 +70,7 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 0,
+            duration: 4000,
           })
         })
         // this.message = err.response.data.errorMessage
@@ -86,7 +86,7 @@ export default {
         //     notification.error({
         //       message: 'Error',
         //       description: errorMessage,
-        //       duration: 0,
+        //       duration: 4000,
         //     })
         //     return
         //   }
@@ -94,7 +94,7 @@ export default {
         //     notification.error({
         //       message: 'Error',
         //       description: element.message,
-        //       duration: 0,
+        //       duration: 4000,
         //     })
         //   })
         // }
@@ -119,7 +119,7 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Only 5 proprietors can be added',
-          duration: 0,
+          duration: 4000,
         })
         return
       }

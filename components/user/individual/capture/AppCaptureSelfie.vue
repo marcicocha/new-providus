@@ -131,7 +131,7 @@ export default {
             notification.error({
               message: 'Error',
               description: errorMessage,
-              duration: 0,
+              duration: 4000,
             })
           }
         })
@@ -155,7 +155,7 @@ export default {
             notification.error({
               message: 'Error',
               description: errorMessage,
-              duration: 0,
+              duration: 4000,
             })
           }
         })

@@ -59,7 +59,7 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 0,
+            duration: 4000,
           })
         })
         // let errorMessage = 'Network Error'

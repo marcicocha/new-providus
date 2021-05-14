@@ -82,14 +82,14 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Input File must not be Larger than 635KB',
-          duration: 0,
+          duration: 4000,
         })
       } else if (!extensionStatus) {
         this.file = null
         notification.error({
           message: 'Error',
           description: `You can only upload ${this.extension.toString()} file`,
-          duration: 0,
+          duration: 4000,
         })
       }
     },

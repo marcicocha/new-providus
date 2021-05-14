@@ -240,7 +240,7 @@ export default {
           notification.error({
             message: 'Error',
             description: 'Expiry Date should be greater than Issued date',
-            duration: 0,
+            duration: 4000,
           })
           return
         }
@@ -248,7 +248,7 @@ export default {
           notification.error({
             message: 'Error',
             description: 'Issue Date should be less than current Date',
-            duration: 0,
+            duration: 4000,
           })
           return
         }
@@ -256,7 +256,7 @@ export default {
           notification.error({
             message: 'Error',
             description: 'ExpiryDate should be greater than current Date',
-            duration: 0,
+            duration: 4000,
           })
           return
         }

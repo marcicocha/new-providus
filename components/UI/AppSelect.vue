@@ -212,7 +212,7 @@ export default {
             notification.error({
               message: 'Error Message',
               description: errorMessage,
-              duration: 0,
+              duration: 4000,
             })
           }
         })

@@ -112,7 +112,7 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 0,
+            duration: 4000,
           })
         })
         this.message = err.response.data.errorMessage
@@ -175,7 +175,7 @@ export default {
         message: 'Error',
         description: message,
         type: 'error',
-        duration: 0,
+        duration: 4000,
       })
     },
     ...mapActions({

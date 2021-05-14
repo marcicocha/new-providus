@@ -125,7 +125,7 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 0,
+            duration: 4000,
           })
         })
       }
@@ -135,7 +135,7 @@ export default {
         notification.error({
           message: 'Error',
           description: 'RC field is required to proceed',
-          duration: 0,
+          duration: 4000,
         })
         return
       }
@@ -160,7 +160,7 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 0,
+            duration: 4000,
           })
           error = msg
         })
@@ -208,7 +208,7 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 0,
+            duration: 4000,
           })
         })
       }
@@ -248,7 +248,7 @@ export default {
       notification.error({
         message: 'Error',
         description: message,
-        duration: 0,
+        duration: 4000,
       })
     },
     ...mapActions({
