@@ -41,7 +41,7 @@
     .mobile_footer {
       // position: absolute;
       // bottom: 0;
-      margin-top: 1rem;
+      padding-top: 1rem;
       height: 100%;
       img {
         position: absolute;
