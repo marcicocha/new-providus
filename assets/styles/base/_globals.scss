@@ -51,7 +51,15 @@ h2 {
 }
 .outlined_button {
   border-color: $primary !important;
+  color: $primary !important;
 }
 ul {
   padding-left: 0;
+  list-style-type: none;
+}
+.file-cta {
+  border: none !important;
+}
+.file-input {
+  display: none !important;
 }

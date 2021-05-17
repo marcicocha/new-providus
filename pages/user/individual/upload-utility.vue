@@ -6,14 +6,18 @@
     />
     <br />
     <div>
-      <AppButton @click="capturePageHandler">
+      <AppButton
+        type="default"
+        class="outlined_button"
+        @click="capturePageHandler"
+      >
         <span class="flex_display"
           ><img src="@/assets/images/camera.svg" alt="camera" />
           <span>Capture with Camera</span></span
         >
       </AppButton>
       <br />
-      <h4>OR</h4>
+      <h4 style="margin-top: 0.5rem">OR</h4>
       <AppUpload
         label="from Device"
         height="10em"
