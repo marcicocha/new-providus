@@ -275,7 +275,7 @@ function onTemplateCreated(tpl) {
   console.log('Template Result:', tpl)
 
   // Convert response to Base64
-  const base64 = btoa(
+  let base64 = btoa(
     new Uint8Array(tpl).reduce(
       (data, byte) => data + String.fromCharCode(byte),
       ''

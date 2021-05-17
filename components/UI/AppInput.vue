@@ -15,7 +15,7 @@
         :class="classNames"
         :allow-clear="allowClear"
         :autocomplete="autocomplete"
-        :max-length="maxLength"
+        :max-length="parseInt(maxLength, 10)"
         @blur="blurHandler"
       />
     </a-form-item>
@@ -111,7 +111,7 @@ export default {
     },
     maxLength: {
       type: [Number, String],
-      default: 100,
+      default: '100',
     },
     required: {
       type: Boolean,
