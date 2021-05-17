@@ -1,5 +1,5 @@
 <template>
-  <div class="full-input">
+  <div class="full-checkbox">
     <label class="checkbox">
       <input
         v-model="innerValue"
@@ -75,7 +75,7 @@ input {
   width: auto;
   margin-right: 15px;
 }
-.full-input {
+.full-checkbox {
   display: inline-block;
   width: 100%;
   margin-bottom: 10px;

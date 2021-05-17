@@ -370,8 +370,7 @@ canvas {
 .select,
 p,
 pre,
-img,
-div {
+img {
   height: auto;
   display: inline-block;
   font-size: 10px;

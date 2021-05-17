@@ -50,7 +50,7 @@
         >
       </AppButton>
       <br />
-      <h4>OR</h4>
+      <h4 style="margin-top: 0.5rem">OR</h4>
       <AppUpload
         label="from Device"
         height="10em"
