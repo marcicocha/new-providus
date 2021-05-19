@@ -396,6 +396,7 @@ export default {
   position: absolute;
   bottom: 10%;
   font-size: 15px;
+  margin-top: 2rem;
 }
 .error_message {
   color: #cc4c4c;
