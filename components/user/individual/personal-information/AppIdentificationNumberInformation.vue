@@ -16,6 +16,7 @@
       v-model="localPersonInfoObject.purposeOfAcc"
       label="Purpose of Account"
       placeholder="Type purpose of account here"
+      required
     />
     <AppButton @click="submitIdentificationInfoHandler"
       >Save &amp; Continue</AppButton
