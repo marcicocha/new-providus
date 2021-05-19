@@ -6,6 +6,7 @@
           v-model.trim="contactDetails.email"
           label="Email Address"
           placeholder="Enter your Email Address"
+          required
         />
       </div>
 
@@ -18,6 +19,7 @@
             is-phone
             :max-length="15"
             :min-length="7"
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -26,8 +28,8 @@
             label="Alt. Phone Number"
             placeholder="Enter Number"
             is-phone
-            max-length="15"
-            min-length="7"
+            :max-length="15"
+            :min-length="7"
           />
         </a-col>
         <a-col :span="24">
@@ -36,6 +38,7 @@
             label="Closest Landmark"
             placeholder="Enter Closest Landmark"
             is-text
+            required
           />
         </a-col>
         <a-col :span="24">
@@ -43,6 +46,7 @@
             v-model="contactDetails.residentialAddress"
             label="Residential Address"
             placeholder="Enter Residential Address"
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -57,6 +61,7 @@
                 value: resp,
               })
             "
+            required
             @change="selectStateHandler"
           />
         </a-col>
@@ -73,6 +78,7 @@
                 value: resp,
               })
             "
+            required
           />
         </a-col>
         <a-col>

@@ -26,6 +26,7 @@
               label="Issue Date"
               placeholder="Select Date"
               input-type="date"
+              required
             />
           </a-col>
           <a-col :span="12">
@@ -34,6 +35,7 @@
               label="Expiry Date"
               placeholder="Select Date"
               input-type="date"
+              required
             />
           </a-col>
         </a-row>

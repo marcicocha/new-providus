@@ -57,6 +57,7 @@
               v-model="nationalityInfoObject.residentPermitNo"
               label="Resident Permit No"
               placeholder="Type Number"
+              :required="nationalityInfoObject.nationality === 'FOREIGN'"
             />
           </a-col>
           <a-col :span="12">
@@ -65,6 +66,7 @@
               label="Permit Issue Date"
               placeholder="Select date"
               input-type="date"
+              :required="nationalityInfoObject.nationality === 'FOREIGN'"
             />
           </a-col>
           <a-col :span="12">
@@ -73,6 +75,7 @@
               label="Permit Expiry Date"
               placeholder="Select date"
               input-type="date"
+              :required="nationalityInfoObject.nationality === 'FOREIGN'"
             />
           </a-col>
           <a-col :span="24">
@@ -80,6 +83,7 @@
               v-model="nationalityInfoObject.taxPayerId"
               label="Tax Payer's ID"
               placeholder="Enter ID"
+              :required="nationalityInfoObject.nationality === 'FOREIGN'"
             />
           </a-col>
           <a-col :span="12">
@@ -89,6 +93,7 @@
               label="Dual Citizenship?"
               placeholder="Select Option"
               :data="['YES', 'NO']"
+              :required="nationalityInfoObject.nationality === 'FOREIGN'"
               @change="dualCitizenshipHandler"
             />
           </a-col>
@@ -99,6 +104,7 @@
               placeholder="Enter Alt. Citizenship"
               :disabled="nationalityInfoObject.dualCitizenship !== 'YES'"
               is-text
+              :required="nationalityInfoObject.dualCitizenship === 'YES'"
             />
           </a-col>
         </a-row>
@@ -114,6 +120,7 @@
             value: resp,
           })
         "
+        required
       />
     </a-form>
     <AppButton @click="submitNationalityInfoHandler">Continue</AppButton>

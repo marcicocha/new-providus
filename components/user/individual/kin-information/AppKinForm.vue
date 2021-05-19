@@ -14,6 +14,7 @@
                 value: resp,
               })
             "
+            required
           />
         </a-col>
         <a-col :span="16">
@@ -22,6 +23,7 @@
             label="Surname"
             placeholder="Type Surname"
             is-text
+            required
           />
         </a-col>
       </a-row>
@@ -32,6 +34,7 @@
             label="First Name"
             placeholder="First Name"
             is-text
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -54,6 +57,7 @@
                 value: resp,
               })
             "
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -68,6 +72,7 @@
                 value: resp,
               })
             "
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -82,6 +87,7 @@
                 value: resp,
               })
             "
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -90,9 +96,10 @@
             label="Date of Birth"
             placeholder="Select Date"
             input-type="date"
+            required
           />
         </a-col>
-        <a-col :span="12">
+        <a-col :span="24">
           <AppInput
             v-model="kinObject.bvn"
             label="BVN"

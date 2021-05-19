@@ -15,6 +15,7 @@
                 value: resp,
               })
             "
+            required
           />
         </a-col>
         <a-col :span="16">
@@ -25,6 +26,7 @@
             is-text
             :max-length="30"
             disabled
+            required
           />
         </a-col>
       </a-row>
@@ -37,6 +39,7 @@
             is-text
             :max-length="30"
             disabled
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -61,6 +64,7 @@
                 value: resp,
               })
             "
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -76,6 +80,7 @@
               })
             "
             disabled
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -84,6 +89,7 @@
             label="Mother's Maiden Name"
             placeholder="Type Name"
             is-text
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -93,6 +99,7 @@
             placeholder="Select Date"
             input-type="date"
             disabled
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -101,6 +108,7 @@
             label="Occupation"
             placeholder="Type Occupation"
             is-text
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -116,6 +124,7 @@
               })
             "
             disabled
+            required
           />
         </a-col>
       </a-row>

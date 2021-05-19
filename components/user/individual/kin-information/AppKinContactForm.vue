@@ -6,6 +6,7 @@
           v-model.trim="kinContactObject.email"
           label="Email Address"
           placeholder="Enter Next of Kin's Email Address"
+          required
         />
       </div>
       <a-row type="flex" :gutter="6">
@@ -15,8 +16,9 @@
             label="Phone Number"
             placeholder="Enter Number"
             is-phone
-            max-length="15"
-            min-length="7"
+            :max-length="15"
+            :min-length="7"
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -25,8 +27,8 @@
             label="Alternate Phone Number"
             placeholder="Enter Number"
             is-phone
-            max-length="15"
-            min-length="7"
+            :max-length="15"
+            :min-length="7"
           />
         </a-col>
         <a-col :span="8">
@@ -34,6 +36,7 @@
             v-model="kinContactObject.houseNo"
             label="House No."
             placeholder="Enter No."
+            required
           />
         </a-col>
         <a-col :span="16">
@@ -42,6 +45,7 @@
             label="Closest Landmark"
             placeholder="Enter Closest Landmark"
             is-text
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -49,6 +53,7 @@
             v-model="kinContactObject.streetName"
             label="Street Name"
             placeholder="Enter Street Name"
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -57,6 +62,7 @@
             label="City/Town"
             placeholder="Enter City or Town"
             is-text
+            required
           />
         </a-col>
         <a-col :span="24">
@@ -71,6 +77,7 @@
                 value: resp,
               })
             "
+            required
             @change="changeCountryHandler"
           />
         </a-col>
@@ -88,6 +95,7 @@
                   value: resp,
                 })
               "
+              required
               @change="changeStateHandler"
             />
           </a-col>
@@ -104,6 +112,7 @@
                   value: resp,
                 })
               "
+              required
             />
           </a-col>
         </template>

@@ -55,6 +55,7 @@
             is-number
             :max-length="11"
             :min-length="11"
+            required
           />
           <div style="height: 20px"></div>
           <AppButton
