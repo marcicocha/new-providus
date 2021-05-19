@@ -17,6 +17,7 @@
         <AppUpload
           label="Signature"
           @fileUploadHandler="fileUploadSignatureHandler"
+          required
         />
         <AppButton
           :loading="loading"
