@@ -82,6 +82,9 @@ export default {
       lga: foreignNationality === 'NO' ? lga : undefined,
     }
   },
+  destroyed() {
+    notification.destroy()
+  },
   methods: {
     nationalityHandler(obj) {
       this.isNationalityInfo = false

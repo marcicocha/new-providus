@@ -108,6 +108,9 @@ export default {
       })
     }
   },
+  destroyed() {
+    notification.destroy()
+  },
   methods: {
     submitCaptureHandler() {
       //  this.$emit('submitCapturehandler')

@@ -66,6 +66,9 @@ export default {
       return 'Reference Form 2 (optional)'
     },
   },
+  destroyed() {
+    notification.destroy()
+  },
   methods: {
     fileUploadReference1Handler(file) {
       this.referenceFile1 = file

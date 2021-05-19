@@ -34,6 +34,9 @@ export default {
       counter: 0,
     }
   },
+  destroyed() {
+    notification.destroy()
+  },
   methods: {
     captureInstructionHandler() {
       this.isCaptureInstruction = false

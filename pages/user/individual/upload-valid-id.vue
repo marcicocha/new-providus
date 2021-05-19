@@ -97,6 +97,9 @@ export default {
       message: '',
     }
   },
+  destroyed() {
+    notification.destroy()
+  },
   methods: {
     async submitUploadHandler() {
       const validationResponse = this.validationHandler()

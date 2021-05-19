@@ -167,6 +167,9 @@ export default {
       baseUrl: process.env.BASE_URL,
     }
   },
+  destroyed() {
+    notification.destroy()
+  },
   methods: {
     getImgUrl(pic) {
       return `data:image/png;base64,${pic}`

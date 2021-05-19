@@ -120,6 +120,9 @@ export default {
       ...contactObject,
     }
   },
+  destroyed() {
+    notification.destroy()
+  },
   methods: {
     async contactDetailsHandler() {
       if (

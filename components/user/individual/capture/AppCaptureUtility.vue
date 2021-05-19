@@ -84,6 +84,7 @@ export default {
   },
   destroyed() {
     this.$destroy()
+    notification.destroy()
   },
   methods: {
     submitCaptureHandler() {

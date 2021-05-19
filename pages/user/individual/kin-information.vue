@@ -62,6 +62,9 @@ export default {
       }
     }
   },
+  destroyed() {
+    notification.destroy()
+  },
   methods: {
     kinDetailsHandler(obj) {
       this.heading = 'Next of Kin Contact information'
