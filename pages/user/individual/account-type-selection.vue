@@ -393,8 +393,8 @@ export default {
   position: relative;
 }
 .notification {
-  position: absolute;
-  bottom: 10%;
+  // position: absolute;
+  // bottom: 10%;
   font-size: 15px;
   padding-top: 2rem;
 }
@@ -436,7 +436,7 @@ export default {
       width: 85%;
     }
     .notification {
-      bottom: 0;
+      // bottom: 0;
       font-size: 13px;
     }
     h2 {
@@ -455,8 +455,8 @@ export default {
       width: 80%;
     }
     .notification {
-      position: absolute;
-      bottom: 5%;
+      // position: absolute;
+      // bottom: 5%;
       font-size: 15px;
     }
     h2 {
@@ -495,8 +495,8 @@ export default {
     margin-bottom: 20px;
   }
   .notification {
-    position: absolute;
-    bottom: 2%;
+    // position: absolute;
+    // bottom: 2%;
     font-size: 12px;
   }
   .back-button {
