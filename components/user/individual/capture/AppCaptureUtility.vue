@@ -61,14 +61,21 @@
   </div>
 </template>
 <script>
-import AppButton from '@/components/UI/AppButton'
+import { mapActions } from 'vuex'
 import { notification, Row, Col } from 'ant-design-vue'
+import AppButton from '@/components/UI/AppButton'
 export default {
   name: 'AppCaptureUtility',
   components: {
     AppButton,
     'a-row': Row,
     'a-col': Col,
+  },
+  props: {
+    utilityKey: {
+      type: String,
+      default: 'utility',
+    },
   },
   data() {
     return {
@@ -102,30 +109,26 @@ export default {
     },
     async nextHandler() {
       try {
-        // const file = new File([this.imgSrc], 'selfie.jpg', {
-        //   lastModified: new Date().getTime(),
-        //   type: 'image/jpeg',
-        // })
         this.formLoading = true
         const blob = document.blob
-        const file = new File([blob], 'utility.jpg', {
-          lastModified: new Date().getTime(),
-          type: 'image/jpeg',
-        })
-        const requestId = this.$cookies.get('requestId')
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append('requestId', requestId)
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } }
-        await this.$axios.$post(
-          '/individual/utilityBillUpload',
-          formData,
-          config
-        )
+        if (this.utilityKey === 'utility') {
+          const file = new File([blob], 'utility.jpg', {
+            lastModified: new Date().getTime(),
+            type: 'image/jpeg',
+          })
+          await this.submitUtilityInfoHandler(file)
+        } else {
+          const signatureFile = new File([blob], 'signature.jpg', {
+            lastModified: new Date().getTime(),
+            type: 'image/jpeg',
+          })
+          await this.submitSignatureInfoHandler(signatureFile)
+        }
+
         document.querySelector('#stopcamera').click()
         this.formLoading = false
         this.unloadScript()
-        this.$router.replace('/user/individual/upload-document')
+        this.$router.replace('/user/individual/upload')
       } catch (err) {
         this.formLoading = false
 
@@ -263,6 +266,10 @@ export default {
           }
         })
     },
+    ...mapActions({
+      submitUtilityInfoHandler: 'UPLOAD_UTILITY',
+      submitSignatureInfoHandler: 'UPLOAD_SIGNATURE',
+    }),
   },
 }
 </script>

@@ -1,10 +1,10 @@
 <template>
   <div>
     <a-form>
-      <a-row type="flex">
-        <a-col :span="8">
+      <a-row type="flex" :gutter="6">
+        <a-col :span="12">
           <AppSelect
-            v-model="kinObject.title"
+            v-model="kinInfoObject.title"
             label="Title"
             placeholder="Select"
             url="/globalData/data?name=TITLE"
@@ -14,23 +14,20 @@
                 value: resp,
               })
             "
-            required
           />
         </a-col>
-        <a-col :span="16">
+        <a-col :span="12">
           <AppInput
-            v-model="kinObject.surname"
+            v-model="kinInfoObject.surname"
             label="Surname"
             placeholder="Type Surname"
             is-text
             required
           />
         </a-col>
-      </a-row>
-      <a-row type="flex" :gutter="6">
         <a-col :span="12">
           <AppInput
-            v-model="kinObject.firstName"
+            v-model="kinInfoObject.firstName"
             label="First Name"
             placeholder="First Name"
             is-text
@@ -39,7 +36,7 @@
         </a-col>
         <a-col :span="12">
           <AppInput
-            v-model="kinObject.middleName"
+            v-model="kinInfoObject.middleName"
             label="Middle Name"
             placeholder="Middle Name"
             is-text
@@ -47,7 +44,7 @@
         </a-col>
         <a-col :span="12">
           <AppSelect
-            v-model="kinObject.relationship"
+            v-model="kinInfoObject.relationship"
             label="Relationship"
             placeholder="Select your relationship with this person"
             url="/globalData/data?name=RELATIONSHIP"
@@ -61,52 +58,18 @@
           />
         </a-col>
         <a-col :span="12">
-          <AppSelect
-            v-model="kinObject.maritalStatus"
-            label="Marital Status"
-            placeholder="Select Option"
-            url="/globalData/data?name=MARITAL_STATUS"
-            :call-back-func="
-              (resp) => ({
-                text: resp,
-                value: resp,
-              })
-            "
-            required
-          />
-        </a-col>
-        <a-col :span="12">
-          <AppSelect
-            v-model="kinObject.gender"
-            label="Gender"
-            placeholder="Select Option"
-            url="/globalData/data?name=GENDER"
-            :call-back-func="
-              (resp) => ({
-                text: resp,
-                value: resp,
-              })
-            "
-            required
-          />
-        </a-col>
-        <a-col :span="12">
           <AppInput
-            v-model="kinObject.dateOfBirth"
-            label="Date of Birth"
-            placeholder="Select Date"
-            input-type="date"
-            required
+            v-model="kinInfoObject.phoneNumber"
+            label="Phone Number"
+            placeholder="Phone Number"
           />
         </a-col>
         <a-col :span="24">
-          <AppInput
-            v-model="kinObject.bvn"
-            label="BVN"
-            placeholder="Enter Bank Verification Number"
-            is-number
-            :max-length="11"
-            :min-length="11"
+          <AppTextArea
+            v-model="kinInfoObject.contact"
+            label="Contact Address"
+            placeholder="Type Contact Address"
+            required
           />
         </a-col>
       </a-row>
@@ -120,6 +83,8 @@ import { Row, Col, Form, notification } from 'ant-design-vue'
 import AppInput from '@/components/UI/AppInput'
 import AppSelect from '@/components/UI/AppSelect'
 import AppButton from '@/components/UI/AppButton'
+import AppTextArea from '@/components/UI/AppTextArea'
+
 export default {
   name: 'AppKinForm',
   components: {
@@ -129,106 +94,75 @@ export default {
     'a-row': Row,
     'a-col': Col,
     'a-form': Form,
+    AppTextArea,
   },
-  props: {
-    kinInfoObject: {
-      type: Object,
-      default: () => {},
-    },
-  },
+
   data() {
     return {
-      kinObject: {},
+      kinInfoObject: {},
     }
   },
-  watch: {
-    kinInfoObject: {
-      handler(newKinInfoObject) {
-        if (!newKinInfoObject) {
-          return
-        }
-        this.kinObject = {
-          ...newKinInfoObject,
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
+  destroyed() {
+    notification.destroy()
   },
   methods: {
     kinDetailsHandler() {
-      if (this.kinObject.title === undefined || this.kinObject.title === '') {
-        this.$emit('errorMessageHandler', 'Title')
+      if (
+        this.kinInfoObject.surname === undefined ||
+        this.kinInfoObject.surname === ''
+      ) {
+        this.errorMessageHandler('Surname')
         return
       }
       if (
-        this.kinObject.surname === undefined ||
-        this.kinObject.surname === ''
+        this.kinInfoObject.firstName === undefined ||
+        this.kinInfoObject.firstName === ''
       ) {
-        this.$emit('errorMessageHandler', 'Surname')
+        this.errorMessageHandler('First Name')
         return
       }
       if (
-        this.kinObject.firstName === undefined ||
-        this.kinObject.firstName === ''
+        this.kinInfoObject.relationship === undefined ||
+        this.kinInfoObject.relationship === ''
       ) {
-        this.$emit('errorMessageHandler', 'First Name')
-        return
-      }
-      // if (
-      //   this.kinObject.middleName === undefined ||
-      //   this.kinObject.middleName === ''
-      // ) {
-      //   this.$emit('errorMessageHandler', 'Middle Name')
-      //   return
-      // }
-      if (
-        this.kinObject.relationship === undefined ||
-        this.kinObject.relationship === ''
-      ) {
-        this.$emit('errorMessageHandler', 'Relationship')
+        this.errorMessageHandler('Relationship')
         return
       }
       if (
-        this.kinObject.maritalStatus === undefined ||
-        this.kinObject.maritalStatus === ''
+        this.kinInfoObject.contact === undefined ||
+        this.kinInfoObject.contact === ''
       ) {
-        this.$emit('errorMessageHandler', 'MaritalStatus')
+        this.errorMessageHandler('Contact Address')
         return
       }
-      if (this.kinObject.gender === undefined || this.kinObject.gender === '') {
-        this.$emit('errorMessageHandler', 'Gender')
-        return
-      }
-      if (
-        this.kinObject.dateOfBirth === undefined ||
-        this.kinObject.dateOfBirth === ''
-      ) {
-        this.$emit('errorMessageHandler', 'Date of Birth')
-        return
-      }
-      // const year = this.kinObject.dateOfBirth.substring(0, 4)
-      const newDate = new Date()
-      const currentDate = new Date(this.kinObject.dateOfBirth)
-      if (currentDate > newDate) {
-        this.$emit('errorMessageHandler', 'Year')
-        return
-      }
-      if (this.kinObject.bvn) {
-        if (this.kinObject.bvn.length < 11) {
-          this.message =
-            'The BVN entered is incomplete. BVN length should be 11'
+      this.kinHandler()
+    },
+    async kinHandler() {
+      try {
+        const response = this.$cookies.get('requestId')
+        const kinInfoObject = {
+          ...this.kinInfoObject,
+          requestId: response,
+        }
+        await this.$axios.$put('/individual/kinDetails', kinInfoObject)
+        this.$router.replace('/user/individual/upload')
+      } catch (err) {
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
           notification.error({
-            message: 'BVN Validation Message',
-            description: this.message,
+            message: 'Error',
+            description: msg,
             duration: 4000,
           })
-          return
-        }
+        })
       }
-
-      // const year = this.kinObject.dateOfBirth.getYear()
-      this.$emit('kinDetailsHandler', this.kinObject)
+    },
+    errorMessageHandler(message) {
+      notification.error({
+        message: 'Error',
+        description: `${message} is compulsory`,
+        duration: 4000,
+      })
     },
   },
 }

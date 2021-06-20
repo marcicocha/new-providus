@@ -61,6 +61,7 @@
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import AppButton from '@/components/UI/AppButton'
 import { notification, Row, Col } from 'ant-design-vue'
 export default {
@@ -114,73 +115,24 @@ export default {
       })
     },
     async nextHandler() {
-      try {
-        this.formLoading = true
-        const blob = document.blob
-        const file = new File([blob], 'id.jpg', {
-          lastModified: new Date().getTime(),
-          type: 'image/jpeg',
-        })
+      this.formLoading = true
+      const blob = document.blob
+      const file = new File([blob], 'id.jpg', {
+        lastModified: new Date().getTime(),
+        type: 'image/jpeg',
+      })
 
-        const requestId = this.$cookies.get('requestId')
-        const idObject = this.$cookies.get('idObject')
-        const formData = new FormData()
-        formData.append('file', file)
-        formData.append('requestId', requestId)
-        formData.append('issuedDate', idObject.issuedDate)
-        formData.append('expiryDate', idObject.expiryDate)
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } }
-        await this.$axios.$post('/individual/idCardUpload', formData, config)
-
-        document.querySelector('#stopcamera').click()
-        this.formLoading = false
-        this.unloadScript()
-        this.$router.replace('/user/individual/upload-utility')
-      } catch (err) {
-        this.formLoading = false
-        const { default: errorHandler } = await import('@/utils/errorHandler')
-        errorHandler(err).forEach((msg) => {
-          notification.error({
-            message: 'Error',
-            description: msg,
-            duration: 4000,
-          })
-        })
-        // let errorMessage = 'Network Error'
-
-        // if (err && !err.response) {
-        //   errorMessage = String(err)
-        //   const customMessage = 'please try again'
-        //   notification.error({
-        //     message: errorMessage,
-        //     description: customMessage,
-        //     type: 'error',
-        //     duration: 4000,
-        //   })
-        //   return
-        // }
-        // eslint-disable-next-line no-prototype-builtins
-        // if (err && err.hasOwnProperty('response')) {
-        //   const res = err.response
-        //   // eslint-disable-next-line no-prototype-builtins
-        //   if (res.hasOwnProperty('data')) {
-        //     errorMessage = res.data.errorMessage
-        //     if (!errorMessage) {
-        //       errorMessage =
-        //         'No response was received from the server...please try again'
-        //     }
-        //   } else {
-        //     errorMessage =
-        //       'No response was received from the server...please try again'
-        //   }
-
-        //   notification.error({
-        //     message: 'Error',
-        //     description: errorMessage,
-        //     duration: 4000,
-        //   })
-        // }
+      const idType = this.$cookies.get('idType')
+      const idObject = {
+        idType,
+        identityFile: file,
       }
+      await this.submitIdInfoHandler(idObject)
+
+      document.querySelector('#stopcamera').click()
+      this.formLoading = false
+      this.unloadScript()
+      this.$router.replace('/user/individual/upload')
     },
     async loadScript() {
       try {
@@ -211,40 +163,6 @@ export default {
             duration: 4000,
           })
         })
-        // let errorMessage = 'Network Error'
-
-        // // Error Message from Backend
-        // if (err && !err.response) {
-        //   errorMessage = String(err)
-        //   const customMessage = 'please try again'
-        //   notification.error({
-        //     message: errorMessage,
-        //     description: customMessage,
-        //     duration: 4000,
-        //   })
-        //   return
-        // }
-        // // eslint-disable-next-line no-prototype-builtins
-        // if (err && err.hasOwnProperty('response')) {
-        //   const res = err.response
-        //   // eslint-disable-next-line no-prototype-builtins
-        //   if (res.hasOwnProperty('data')) {
-        //     errorMessage = res.data.errorMessage
-        //     if (!errorMessage) {
-        //       errorMessage =
-        //         'No response was received from the server...please try again'
-        //     }
-        //   } else {
-        //     errorMessage =
-        //       'No response was received from the server...please try again'
-        //   }
-
-        //   notification.error({
-        //     message: 'Error',
-        //     description: errorMessage,
-        //     duration: 4000,
-        //   })
-        // }
       }
     },
     async unloadScript() {
@@ -263,45 +181,11 @@ export default {
             duration: 4000,
           })
         })
-        // let errorMessage = 'Network Error'
-
-        // Error Message from Backend
-        // if (err && !err.response) {
-        //   errorMessage = String(err)
-        //   const customMessage = 'please try again'
-        //   this.$toast.open({
-        //     message: `<p class="toast-title">${errorMessage} </p>
-        //           <p class="toast-msg"> ${customMessage} </p>`,
-        //     type: 'error',
-        //     duration: 4000,
-        //     dismissible: true,
-        //   })
-        //   return
-        // }
-        // eslint-disable-next-line no-prototype-builtins
-        // if (err && err.hasOwnProperty('response')) {
-        //   const res = err.response
-        //   // eslint-disable-next-line no-prototype-builtins
-        //   if (res.hasOwnProperty('data')) {
-        //     errorMessage = res.data.errorMessage
-        //     if (!errorMessage) {
-        //       errorMessage =
-        //         'No response was received from the server...please try again'
-        //     }
-        //   } else {
-        //     errorMessage =
-        //       'No response was received from the server...please try again'
-        //   }
-
-        //   this.$toast.open({
-        //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
-        //     type: 'error',
-        //     duration: 4000,
-        //     dismissible: true,
-        //   })
-        // }
       }
     },
+    ...mapActions({
+      submitIdInfoHandler: 'UPLOAD_ID_INFORMATION',
+    }),
   },
 }
 </script>

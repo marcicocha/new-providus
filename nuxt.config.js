@@ -23,6 +23,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     { src: 'ant-design-vue/lib/style/index.less', lang: 'less' },
+    { src: '@/assets/theme.less', lang: 'less' },
     // 'ant-design-vue/dist/antd.css',
     '@/assets/main.scss',
   ],
@@ -50,6 +51,7 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
+    '@nuxtjs/style-resources',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

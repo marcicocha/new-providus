@@ -1,124 +1,59 @@
 <template>
   <div>
-    <a v-if="!isBasicDetails" class="back-button" @click="backButtonHandler"
+    <!-- <a class="back-button" @click="backButtonHandler"
       ><img src="~assets/images/back-arrow.svg" alt="back-button" />
       <span>Back</span></a
-    >
-    <AppTitleComponent :heading="heading" />
+    > -->
+    <AppTitleComponent heading="Next of Kin information" />
 
-    <AppKinForm
-      v-if="isBasicDetails"
-      :kin-info-object="kinInfoObject"
-      @kinDetailsHandler="kinDetailsHandler"
-      @errorMessageHandler="errorMessageHandler"
-    />
-    <AppKinContactForm
-      v-if="!isBasicDetails"
-      :kin-info-object="kinInfoObject"
-      @kinsContactDetailsHandler="kinsContactDetailsHandler"
-      @errorMessageHandler="errorMessageHandler"
-    />
+    <AppKinForm />
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
-import { notification } from 'ant-design-vue'
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
 import AppKinForm from '@/components/user/individual/kin-information/AppKinForm'
-import AppKinContactForm from '@/components/user/individual/kin-information/AppKinContactForm'
 export default {
   components: {
     AppTitleComponent,
     AppKinForm,
-    AppKinContactForm,
   },
   data() {
     return {
       kinInfoObject: {},
       isBasicDetails: true,
-      heading: 'Next of Kin information',
+
       message: '',
     }
   },
-  mounted() {
-    const {
-      // houseNo,
-      landmark,
-      // streetName,
-      residentCity,
-      saveAddress,
-      // residentState,
-      // residentLga,
-    } = this.$cookies.get('contactDetails')
-    if (saveAddress) {
-      this.kinInfoObject = {
-        ...this.kinInfoObject,
-        // houseNo,
-        landMark: landmark,
-        // streetName,
-        city: residentCity,
-        // residentState,
-        // residentLga,
-      }
-    }
-  },
-  destroyed() {
-    notification.destroy()
-  },
+  // mounted() {
+  //   const {
+  //     // houseNo,
+  //     landmark,
+  //     // streetName,
+  //     residentCity,
+  //     saveAddress,
+  //     // residentState,
+  //     // residentLga,
+  //   } = this.$cookies.get('contactDetails')
+  //   if (saveAddress) {
+  //     this.kinInfoObject = {
+  //       ...this.kinInfoObject,
+  //       // houseNo,
+  //       landMark: landmark,
+  //       // streetName,
+  //       city: residentCity,
+  //       // residentState,
+  //       // residentLga,
+  //     }
+  //   }
+  // },
+
   methods: {
-    kinDetailsHandler(obj) {
-      this.heading = 'Next of Kin Contact information'
-      this.isBasicDetails = false
-      this.kinInfoObject = {
-        ...this.kinInfoObject,
-        ...obj,
-      }
-    },
     backButtonHandler() {
-      // if (this.isBasicDetails) {
-      //   this.$router.replace('/user/individual/contact-information')
-      //   return
-      // }
       if (!this.isBasicDetails) {
         this.isBasicDetails = true
       }
     },
-    async kinsContactDetailsHandler(obj) {
-      try {
-        const response = this.$cookies.get('requestId')
-        const kinInfoObject = {
-          ...this.kinInfoObject,
-          ...obj,
-          requestId: response,
-        }
-        await this.$axios.$put('/individual/kinDetails', kinInfoObject)
-        this.$cookies.remove('contactDetails')
-        this.$router.replace('/user/individual/upload-valid-id')
-      } catch (err) {
-        const { default: errorHandler } = await import('@/utils/errorHandler')
-        errorHandler(err).forEach((msg) => {
-          notification.error({
-            message: 'Error',
-            description: msg,
-            duration: 4000,
-          })
-        })
-      }
-    },
-    errorMessageHandler(message) {
-      this.message =
-        message === 'Year'
-          ? `Must not be future date`
-          : `${message} is compulsory`
-      notification.error({
-        message: 'Error',
-        description: this.message,
-        duration: 4000,
-      })
-    },
-    ...mapActions({
-      submitKinInfoHandler: 'individualModule/POST_KINS_INFORMATION',
-    }),
   },
 }
 </script>

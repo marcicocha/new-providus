@@ -1,8 +1,8 @@
 <template>
   <div class="parent-container">
     <AppTitleComponent
-      heading="Upload Utility Bill"
-      description="Please upload a valid utilily bill not later than 3 months"
+      heading="Upload Signature"
+      description="Please upload a Signature"
     />
     <br />
     <div>
@@ -25,7 +25,7 @@
         @errorMessagehandler="errorMessagehandler"
         ><template slot="caption">
           <ul v-if="!identityFile" class="caption_list">
-            <li>Utility must take up at least 80% of the image</li>
+            <li>Signature must take up at least 80% of the image</li>
             <li>Resolution should be above 300 DPI</li>
             <li>Must be a Jpeg</li>
           </ul>
@@ -45,6 +45,7 @@ import { notification } from 'ant-design-vue'
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
 import AppUpload from '@/components/UI/AppUpload'
 import AppButton from '@/components/UI/AppButton'
+
 export default {
   components: {
     AppTitleComponent,
@@ -60,16 +61,16 @@ export default {
   },
   computed: {
     ...mapState({
-      utilityFile: (state) => state.utilityFile,
+      signatureFile: (state) => state.signatureFile,
     }),
   },
   watch: {
-    utilityFile: {
-      handler(newUtilityFile) {
-        if (!newUtilityFile) {
+    signatureFile: {
+      handler(newSignatureFile) {
+        if (!newSignatureFile) {
           this.identityFile = ''
         } else {
-          this.identityFile = newUtilityFile
+          this.identityFile = newSignatureFile
         }
       },
       immediate: true,
@@ -83,7 +84,7 @@ export default {
     async submitUploadHandler() {
       try {
         this.message = ''
-        await this.submitUtilityInfoHandler(this.identityFile)
+        await this.submitSignatureInfoHandler(this.identityFile)
         this.$router.replace('/user/individual/upload')
       } catch (err) {
         const { default: errorHandler } = await import('@/utils/errorHandler')
@@ -97,7 +98,7 @@ export default {
       }
     },
     capturePageHandler() {
-      this.$router.replace('/user/individual/capture-utility')
+      this.$router.replace('/user/individual/capture-signature')
     },
     fileUploadHandler(file) {
       this.identityFile = file
@@ -108,7 +109,7 @@ export default {
       this.identityFile = ''
     },
     ...mapActions({
-      submitUtilityInfoHandler: 'UPLOAD_UTILITY',
+      submitSignatureInfoHandler: 'UPLOAD_SIGNATURE',
     }),
   },
 }

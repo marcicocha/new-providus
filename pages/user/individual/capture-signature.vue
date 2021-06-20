@@ -1,25 +1,35 @@
 <template>
   <div>
-    <!-- <a class="back-button" @click="backButtonHandler"
+    <a class="back-button" @click="backButtonHandler"
       ><img src="~assets/images/back-arrow.svg" alt="back-button" />
       <span>Back</span></a
-    > -->
-    <AppTitleComponent heading="Contact Details" />
-    <AppContactForm />
+    >
+    <AppTitleComponent
+      heading="Capture Signature"
+      description="Please capture Signature."
+    />
+    <AppCaptureUtility :key="counter" utility-key="signature" />
   </div>
 </template>
 <script>
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
-import AppContactForm from '@/components/user/individual/contact-information/AppContactForm.vue'
+import AppCaptureUtility from '@/components/user/individual/capture/AppCaptureUtility'
+
 export default {
   components: {
     AppTitleComponent,
-    AppContactForm,
+    AppCaptureUtility,
+  },
+  data() {
+    return {
+      counter: 0,
+    }
   },
   methods: {
-    // backButtonHandler() {
-    //   this.$router.replace('/user/individual/personal-information')
-    // },
+    backButtonHandler() {
+      this.counter++
+      this.$router.replace('/user/individual/upload-signature')
+    },
   },
 }
 </script>
@@ -29,6 +39,7 @@ export default {
     margin-left: 5px;
   }
 }
+
 @media only screen and (min-width: 1536px) {
   @media only screen and (min-height: 730px) {
     .back-button {

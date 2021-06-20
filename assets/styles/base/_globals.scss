@@ -21,7 +21,7 @@ body {
   line-height: 1.3;
   font-family: 'GothamLight', sans-serif;
   font-size: 16px;
-  height: 100%
+  height: 100%;
 }
 
 a {
@@ -78,4 +78,17 @@ ul {
   font-family: 'GothamLight', sans-serif;
   color: #2e434e !important;
   font-weight: 600 !important;
+}
+.ant-radio-checked::after,
+.ant-radio-checked .ant-radio-inner,
+.ant-radio-wrapper:hover .ant-radio,
+.ant-radio:hover .ant-radio-inner,
+.ant-radio-input:focus + .ant-radio-inner {
+  border-color: $primary;
+}
+.ant-radio-input:focus + .ant-radio-inner {
+  box-shadow: none;
+}
+.ant-radio-inner::after {
+  background: $primary;
 }

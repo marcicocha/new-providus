@@ -6,41 +6,21 @@
     />
     <br />
     <div>
-      <!-- <AppSelectHybrid
-        v-model="idObject.idType"
-        label="Id Type"
-        placeholder="Select Identification Type"
-        url="/globalData/data?name=ID%20TYPE"
-        :call-back-func="
-          (resp) => ({
-            text: resp,
-            value: resp,
-          })
-        "
-      /> -->
       <a-form>
-        <a-row type="flex" :gutter="6">
-          <a-col :span="12">
-            <AppInput
-              v-model="idObject.issuedDate"
-              label="Issue Date"
-              placeholder="Select Date"
-              input-type="date"
-              required
-            />
-          </a-col>
-          <a-col :span="12">
-            <AppInput
-              v-model="idObject.expiryDate"
-              label="Expiry Date"
-              placeholder="Select Date"
-              input-type="date"
-              required
-            />
-          </a-col>
-        </a-row>
+        <AppSelect
+          v-model="idType"
+          label="Id Type"
+          placeholder="Select Id Type"
+          url="/globalData/data?name=ID%20TYPE"
+          :call-back-func="
+            (resp) => ({
+              text: resp,
+              value: resp,
+            })
+          "
+          required
+        />
       </a-form>
-
       <AppButton
         type="default"
         class="outlined_button"
@@ -51,6 +31,7 @@
           <span>Capture with Camera</span></span
         >
       </AppButton>
+      <br />
       <br />
       <h4 style="margin-top: 0.5rem">OR</h4>
       <AppUpload
@@ -67,6 +48,8 @@
           <p v-if="identityFile" class="file_name">{{ identityFile.name }}</p>
         </template>
       </AppUpload>
+      <br />
+      <br />
       <AppButton v-if="identityFile" @click="submitUploadHandler"
         >Continue</AppButton
       >
@@ -75,29 +58,47 @@
   </div>
 </template>
 <script>
-import { Row, Col, Form, notification } from 'ant-design-vue'
+import { mapActions, mapState } from 'vuex'
+import { Form, notification } from 'ant-design-vue'
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
-// import AppSelectHybrid from '@/components/UI/AppSelectHybrid'
 import AppUpload from '@/components/UI/AppUpload'
 import AppButton from '@/components/UI/AppButton'
-import AppInput from '@/components/UI/AppInput'
+import AppSelect from '@/components/UI/AppSelect'
+
 export default {
   components: {
     AppTitleComponent,
-    // AppSelectHybrid,
     AppUpload,
     AppButton,
-    AppInput,
-    'a-row': Row,
-    'a-col': Col,
+    AppSelect,
     'a-form': Form,
   },
   data() {
     return {
-      idObject: {},
       identityFile: '',
       message: '',
+      idType: '',
     }
+  },
+  computed: {
+    ...mapState({
+      idObject: (state) => state.idObject,
+    }),
+  },
+  watch: {
+    idObject: {
+      handler(newIdObject) {
+        if (!newIdObject) {
+          this.identityFile = ''
+          this.idType = ''
+        } else {
+          this.identityFile = newIdObject.identityFile
+          this.idType = newIdObject.idType
+        }
+      },
+      immediate: true,
+      deep: true,
+    },
   },
   destroyed() {
     notification.destroy()
@@ -110,19 +111,12 @@ export default {
       }
       try {
         this.message = ''
-
-        const reader = new FileReader()
-        reader.readAsDataURL(this.identityFile)
-        reader.onload = function () {}
-        const response = this.$cookies.get('requestId')
-        const formData = new FormData()
-        formData.append('file', this.identityFile)
-        formData.append('requestId', response)
-        formData.append('issuedDate', this.idObject.issuedDate)
-        formData.append('expiryDate', this.idObject.expiryDate)
-        const config = { headers: { 'Content-Type': 'multipart/form-data' } }
-        await this.$axios.$post('/individual/idCardUpload', formData, config)
-        this.$router.replace('/user/individual/upload-utility')
+        const idObject = {
+          idType: this.idType,
+          identityFile: this.identityFile,
+        }
+        await this.submitIdInfoHandler(idObject)
+        this.$router.replace('/user/individual/upload')
       } catch (err) {
         const { default: errorHandler } = await import('@/utils/errorHandler')
         errorHandler(err).forEach((msg) => {
@@ -134,64 +128,12 @@ export default {
         })
       }
     },
-    validationHandler() {
-      if (
-        this.idObject.expiryDate === undefined ||
-        this.idObject.expiryDate === ''
-      ) {
-        notification.error({
-          message: 'Error',
-          description: 'Expiry date is Compulsory',
-          duration: 4000,
-        })
-        return true
-      }
-      if (
-        this.idObject.issuedDate === '' ||
-        this.idObject.issuedDate === undefined
-      ) {
-        notification.error({
-          message: 'Error',
-          description: 'Issue Date is Compulsory',
-          duration: 4000,
-        })
-        return true
-      }
-      const expiryDate = new Date(this.idObject.expiryDate).setHours(0, 0, 0, 0)
-      const issuedDate = new Date(this.idObject.issuedDate).setHours(0, 0, 0, 0)
-      const currentDate = new Date().setHours(0, 0, 0, 0)
-      if (issuedDate >= expiryDate) {
-        notification.error({
-          message: 'Error',
-          description: 'Expiry Date should be greater than Issued date',
-          duration: 4000,
-        })
-        return true
-      }
-      if (issuedDate >= currentDate) {
-        notification.error({
-          message: 'Error',
-          description: 'Issue Date should be less than current Date',
-          duration: 4000,
-        })
-        return true
-      }
-      if (expiryDate <= currentDate) {
-        notification.error({
-          message: 'Error',
-          description: 'ExpiryDate should be greater than current Date',
-          duration: 4000,
-        })
-        return true
-      }
-      return false
-    },
     capturePageHandler() {
       const validationResponse = this.validationHandler()
       if (validationResponse) {
         return
       }
-      this.$cookies.set('idObject', this.idObject)
+      this.$cookies.set('idType', this.idType)
       this.$router.replace('/user/individual/capture-id')
     },
     fileUploadHandler(file) {
@@ -202,6 +144,19 @@ export default {
       this.message = message
       this.identityFile = ''
     },
+    validationHandler() {
+      if (this.idType === undefined || this.idType === '') {
+        notification.error({
+          message: 'Error',
+          description: 'Id Type is Compulsory',
+          duration: 4000,
+        })
+        return true
+      }
+    },
+    ...mapActions({
+      submitIdInfoHandler: 'UPLOAD_ID_INFORMATION',
+    }),
   },
 }
 </script>

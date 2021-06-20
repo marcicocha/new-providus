@@ -1,13 +1,27 @@
 <template>
   <div>
     <a-form class="wrap">
-      <a-row type="flex">
-        <a-col :span="8">
+      <a-row type="flex" :gutter="6">
+        <a-col :span="12">
           <AppSelect
-            v-model="basicInformationObject.title"
+            v-model="personalInfoObject.branch"
+            label="Branch"
+            placeholder="Select Branch"
+            url="/branch/allBranchName"
+            :call-back-func="
+              (resp) => ({
+                text: resp,
+                value: resp,
+              })
+            "
+            required
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppSelect
+            v-model="personalInfoObject.title"
             label="Title"
-            placeholder="Select"
-            :data="['Miss', 'Mrs', 'Mister']"
+            placeholder="Select Title"
             url="/globalData/data?name=TITLE"
             :call-back-func="
               (resp) => ({
@@ -18,74 +32,9 @@
             required
           />
         </a-col>
-        <a-col :span="16">
-          <AppInput
-            v-model="basicInformationObject.surname"
-            label="Surname"
-            placeholder="Type Surname"
-            is-text
-            :max-length="30"
-            disabled
-            required
-          />
-        </a-col>
-      </a-row>
-      <a-row type="flex" :gutter="6">
         <a-col :span="12">
           <AppInput
-            v-model="basicInformationObject.firstName"
-            label="First Name"
-            placeholder="First Name"
-            is-text
-            :max-length="30"
-            disabled
-            required
-          />
-        </a-col>
-        <a-col :span="12">
-          <AppInput
-            v-model="basicInformationObject.middleName"
-            label="Middle Name"
-            placeholder="Middle Name"
-            is-text
-            :max-length="30"
-            disabled
-          />
-        </a-col>
-        <a-col :span="12">
-          <AppSelect
-            v-model="basicInformationObject.maritalStatus"
-            label="Marital Status"
-            placeholder="Select Option"
-            url="/globalData/data?name=MARITAL_STATUS"
-            :call-back-func="
-              (resp) => ({
-                text: resp,
-                value: resp,
-              })
-            "
-            required
-          />
-        </a-col>
-        <a-col :span="12">
-          <AppSelect
-            v-model="basicInformationObject.gender"
-            label="Gender"
-            placeholder="Select Option"
-            url="/globalData/data?name=GENDER"
-            :call-back-func="
-              (resp) => ({
-                text: resp,
-                value: resp,
-              })
-            "
-            disabled
-            required
-          />
-        </a-col>
-        <a-col :span="12">
-          <AppInput
-            v-model="basicInformationObject.maidenName"
+            v-model="personalInfoObject.maidenName"
             label="Mother's Maiden Name"
             placeholder="Type Name"
             is-text
@@ -94,17 +43,7 @@
         </a-col>
         <a-col :span="12">
           <AppInput
-            v-model="basicInformationObject.dateOfBirth"
-            label="Date of Birth"
-            placeholder="Select Date"
-            input-type="date"
-            disabled
-            required
-          />
-        </a-col>
-        <a-col :span="12">
-          <AppInput
-            v-model="basicInformationObject.occupation"
+            v-model="personalInfoObject.occupation"
             label="Occupation"
             placeholder="Type Occupation"
             is-text
@@ -113,18 +52,114 @@
         </a-col>
         <a-col :span="12">
           <AppSelect
-            v-model="basicInformationObject.currency"
-            label="Currency Type"
-            placeholder="Select Currency"
-            url="/globalData/data?name=CURRENCY"
+            v-model="personalInfoObject.religion"
+            label="Religion"
+            placeholder="Select Option"
+            url="/globalData/data?name=RELIGION"
             :call-back-func="
               (resp) => ({
                 text: resp,
                 value: resp,
               })
             "
-            disabled
             required
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.purposeOfAcc"
+            label="Purpose of Account"
+            placeholder="Type Purpose of Account"
+            is-text
+            required
+          />
+        </a-col>
+        <a-col :span="12">
+          <p>If US citizen, please provide;</p>
+          <AppInput
+            v-model="personalInfoObject.taxIdNo"
+            label="Tax ID Number"
+            placeholder="Enter ID Number"
+            max-length="15"
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.employeeIdNo"
+            label="Employee ID Number"
+            placeholder="Enter ID Number"
+            max-length="15"
+            style="position: absolute; width: 96.5%; bottom: 0"
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.firstName"
+            label="First Name"
+            disabled
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.lastName"
+            label="Last Surname"
+            disabled
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.middleName"
+            label="Middle Name"
+            disabled
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.dateOfBirth"
+            label="Date of Birth"
+            input-type="date"
+            disabled
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.phoneNumber"
+            label="Phone Number"
+            disabled
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.altPhoneNumber"
+            label="Alt Phone Number"
+            placeholder="Alt Enter Number"
+            is-phone
+            :max-length="15"
+            :min-length="7"
+          />
+        </a-col>
+        <a-col :span="24">
+          <AppInput
+            v-model.trim="personalInfoObject.email"
+            label="Email Address"
+            disabled
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput
+            v-model="personalInfoObject.stateOfOrigin"
+            label="State"
+            disabled
+          />
+        </a-col>
+        <a-col :span="12">
+          <AppInput v-model="personalInfoObject.lga" label="LGA" disabled />
+        </a-col>
+        <a-col :span="24">
+          <AppTextArea
+            v-model="personalInfoObject.contactAddress"
+            label="Contact Address"
+            disabled
           />
         </a-col>
       </a-row>
@@ -134,150 +169,161 @@
   </div>
 </template>
 <script>
-import { Row, Col, Form } from 'ant-design-vue'
+import { notification, Row, Col, Form } from 'ant-design-vue'
+
 import AppInput from '@/components/UI/AppInput'
-// import AppSelect from '@/components/UI/AppSelect'
 import AppSelect from '@/components/UI/AppSelect'
 import AppButton from '@/components/UI/AppButton'
+import AppTextArea from '@/components/UI/AppTextArea'
 
 export default {
   name: 'AppBasicInformation',
   components: {
     AppInput,
     AppButton,
-    // AppSelect,
     AppSelect,
     'a-row': Row,
     'a-col': Col,
     'a-form': Form,
+    AppTextArea,
   },
-  props: {
-    personalInfoObject: {
-      type: Object,
-      default: () => {},
-    },
-  },
+
   data() {
     return {
-      basicInformationObject: {
-        ...this.personalInfoObject,
-      },
+      personalInfoObject: {},
+      message: '',
+      requestId: '',
     }
   },
-  watch: {
-    personalInfoObject: {
-      handler(newPersonalInfoObject) {
-        if (!newPersonalInfoObject) {
-          return
-        }
-        this.basicInformationObject = {
-          ...newPersonalInfoObject,
-        }
-      },
-      deep: true,
-      immediate: true,
-    },
+  async mounted() {
+    const requestId = this.$cookies.get('requestId')
+    this.requestId = requestId
+    const { response } = await this.$axios.$get(
+      `/individual/requestId?requestId=${requestId}`
+    )
+    const {
+      title,
+      firstName,
+      middleName,
+      lastName,
+      maritalStatus,
+      gender,
+      dateOfBirth,
+      email,
+      phoneNumber,
+      lga,
+      stateOfOrigin,
+      contactAddress,
+    } = response
+    this.personalInfoObject = {
+      ...this.personalInfoObject,
+      title,
+      firstName,
+      middleName,
+      lastName,
+      maritalStatus,
+      gender,
+      dateOfBirth,
+      email,
+      phoneNumber,
+      lga,
+      stateOfOrigin,
+      contactAddress,
+    }
+  },
+  destroyed() {
+    notification.destroy()
   },
   methods: {
+    errorMessageHandler(message) {
+      this.message =
+        message === 'Year' ? `Must be 18 and Above` : `${message} is compulsory`
+      notification.error({
+        message: 'Error',
+        description: this.message,
+        duration: 4000,
+      })
+    },
     submitBasicInformationHandler() {
       if (
-        !this.basicInformationObject.title ||
-        this.basicInformationObject.title === '' ||
-        this.basicInformationObject.title === undefined
+        this.personalInfoObject.branch === '' ||
+        this.personalInfoObject.branch === undefined
       ) {
-        this.$emit('errorMessageHandler', 'Title')
+        this.errorMessageHandler('Branch')
         return
       }
       if (
-        this.basicInformationObject.surname === '' ||
-        this.basicInformationObject.surname === undefined
+        !this.personalInfoObject.title ||
+        this.personalInfoObject.title === '' ||
+        this.personalInfoObject.title === undefined
       ) {
-        this.$emit('errorMessageHandler', 'Surname')
+        this.errorMessageHandler('Title')
         return
       }
       if (
-        this.basicInformationObject.firstName === '' ||
-        this.basicInformationObject.firstName === undefined
+        this.personalInfoObject.maidenName === '' ||
+        this.personalInfoObject.maidenName === undefined
       ) {
-        this.$emit('errorMessageHandler', 'First Name')
+        this.errorMessageHandler('Maiden Name')
         return
       }
-      // if (
-      //   this.basicInformationObject.middleName === '' ||
-      //   this.basicInformationObject.middleName === undefined
-      // ) {
-      //   this.$emit('errorMessageHandler', 'Middle Name')
-      //   return
-      // }
+
       if (
-        this.basicInformationObject.maritalStatus === '' ||
-        this.basicInformationObject.maritalStatus === undefined
+        this.personalInfoObject.occupation === '' ||
+        this.personalInfoObject.occupation === undefined
       ) {
-        this.$emit('errorMessageHandler', 'Marital Status')
+        this.errorMessageHandler('Occupation')
         return
       }
       if (
-        this.basicInformationObject.gender === '' ||
-        this.basicInformationObject.gender === undefined
+        this.personalInfoObject.religion === '' ||
+        this.personalInfoObject.religion === undefined
       ) {
-        this.$emit('errorMessageHandler', 'Gender')
+        this.errorMessageHandler('religion')
         return
       }
       if (
-        this.basicInformationObject.maidenName === '' ||
-        this.basicInformationObject.maidenName === undefined
+        this.personalInfoObject.purposeOfAcc === '' ||
+        this.personalInfoObject.purposeOfAcc === undefined
       ) {
-        this.$emit('errorMessageHandler', 'Maiden Name')
+        this.errorMessageHandler('Purpose Of Account')
         return
       }
-      if (
-        this.basicInformationObject.dateOfBirth === '' ||
-        this.basicInformationObject.dateOfBirth === undefined
-      ) {
-        this.$emit('errorMessageHandler', 'Date of Birth')
-        return
+      this.basicInfoHandler()
+    },
+
+    selectStateHandler(value) {
+      this.personalInfoObject = {
+        ...this.personalInfoObject,
+        residentState: value,
+        residentLga: undefined,
       }
-      if (
-        this.basicInformationObject.occupation === '' ||
-        this.basicInformationObject.occupation === undefined
-      ) {
-        this.$emit('errorMessageHandler', 'Occupation')
-        return
+    },
+    async basicInfoHandler() {
+      const personalInfoObject = {
+        ...this.personalInfoObject,
+        requestId: this.requestId,
       }
-      if (
-        this.basicInformationObject.currency === '' ||
-        this.basicInformationObject.currency === undefined
-      ) {
-        this.$emit('errorMessageHandler', 'Currency')
-        return
+      try {
+        await this.$axios.$put('/individual/basicInfo', personalInfoObject)
+
+        this.$router.replace('/user/individual/kin-information')
+      } catch (err) {
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+            duration: 4000,
+          })
+        })
       }
-      const year = this.basicInformationObject.dateOfBirth.substring(0, 4)
-      const newDate = new Date()
-      const currentYear = newDate.getFullYear()
-      if (currentYear - year < 18) {
-        this.$emit('errorMessageHandler', 'Year')
-        return
-      }
-      this.$emit('basicInfoHandler', this.basicInformationObject)
     },
   },
 }
 </script>
-
-<style scoped>
-.surname {
-  /* width: 66.9%;
-  padding-left: 0 !important;
-  border-left-color: transparent !important; */
-  margin-left: -1px !important;
-}
-.firstname {
-  padding-right: 0 !important;
-}
-.small-left-padding {
-  padding-left: 5px !important;
-}
-.small-right-padding {
-  padding-right: 5px !important;
+<style lang="scss" scoped>
+p {
+  font-size: 11px !important;
 }
 </style>

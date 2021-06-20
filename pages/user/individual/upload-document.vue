@@ -4,6 +4,7 @@
     <div>
       <hr />
       <div>
+        <AppInput v-model="referenceNumber" required label="Reference Number" />
         <AppUpload
           :label="accountTypeLabel"
           :extension="['.docx', '.pdf']"
@@ -14,15 +15,7 @@
           :extension="['.docx', '.pdf']"
           @fileUploadHandler="fileUploadReference2Handler"
         />
-        <AppUpload
-          label="Signature"
-          @fileUploadHandler="fileUploadSignatureHandler"
-          required
-        />
-        <AppButton
-          :loading="loading"
-          :disabled="!signatureFile"
-          @click="submitDocumentHandler"
+        <AppButton :loading="loading" @click="submitDocumentHandler"
           >Save &amp; Continue</AppButton
         >
       </div>
@@ -34,19 +27,21 @@ import { notification } from 'ant-design-vue'
 import AppTitleComponent from '@/components/UI/AppTitleComponent'
 import AppUpload from '@/components/UI/AppUpload'
 import AppButton from '@/components/UI/AppButton'
+import AppInput from '@/components/UI/AppInput'
 
 export default {
   components: {
     AppTitleComponent,
     AppUpload,
     AppButton,
+    AppInput,
   },
   data() {
     return {
       referenceFile1: null,
       referenceFile2: null,
-      signatureFile: null,
       loading: false,
+      referenceNumber: '',
     }
   },
   computed: {
@@ -77,19 +72,16 @@ export default {
     fileUploadReference2Handler(file) {
       this.referenceFile2 = file
     },
-    fileUploadSignatureHandler(file) {
-      this.signatureFile = file
-    },
     async submitDocumentHandler() {
-      if (!this.signatureFile) {
+      const response = this.$cookies.get('accountType')
+      if (!this.referenceNumber) {
         notification.error({
           message: 'Error',
-          description: 'Signature File is Compulsory',
+          description: 'Reference Number is Mandatory',
           duration: 4000,
         })
         return
       }
-      const response = this.$cookies.get('accountType')
       if (response === 'CURRENT') {
         if (!this.referenceFile1) {
           notification.error({
@@ -120,13 +112,10 @@ export default {
         if (this.referenceFile2) {
           formData.append('referenceForm2', this.referenceFile2)
         }
-        formData.append('signature', this.signatureFile)
+        formData.append('referenceNumber', this.referenceNumber)
         formData.append('requestId', response)
-        await this.$axios.$post(
-          '/individual/referenceAndSignatureUpload',
-          formData
-        )
-        this.$router.replace('/user/individual/liveness-check')
+        await this.$axios.$post('/individual/uploadReferences', formData)
+        this.$router.replace('/user/individual/weldone')
         this.loading = false
       } catch (err) {
         this.loading = false

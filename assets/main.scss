@@ -1,6 +1,7 @@
 @import './styles/base/lib';
 @import './styles/base/font';
 @import './styles/base/variables';
+@import './styles/base/mixins';
 @import './styles/base/animations';
 @import './styles/base/base';
 @import './styles/base/globals';
@@ -149,7 +150,7 @@
   .page_container {
     padding: 0 90px;
   }
-  input {
+  .ant-input {
     outline: none;
     border: none;
     display: block;
@@ -234,7 +235,7 @@
     padding: 0 90px;
     width: 100vw;
   }
-  input {
+  .ant-input {
     outline: none;
     border: none;
     display: block;
@@ -311,7 +312,7 @@
   .page_container {
     padding: 0 90px;
   }
-  input {
+  .ant-input {
     outline: none;
     border: none;
     display: block;
