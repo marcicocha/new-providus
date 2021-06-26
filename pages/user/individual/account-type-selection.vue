@@ -299,6 +299,7 @@ export default {
   // bottom: 10%;
   font-size: 15px;
   padding-top: 2rem;
+  font-weight: bold;
 }
 .error_message {
   color: #cc4c4c;

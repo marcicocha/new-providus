@@ -365,7 +365,7 @@ export default {
       height: 50px;
     }
     label {
-      font-size: 11px !important;
+      font-size: 12px !important;
     }
   }
   @media only screen and (min-height: 900px) {
