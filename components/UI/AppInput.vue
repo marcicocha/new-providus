@@ -133,7 +133,7 @@ export default {
       type: Boolean,
       default: true,
     },
-    NumberAllowed: {
+    numberAllowed: {
       type: Boolean,
       default: true,
     },
@@ -168,7 +168,6 @@ export default {
         // NO SPACE, NO SPECIAL CHARACTER
         case !this.spaceAllowed && !this.charAllowed && this.textAllowed:
           this.innerValue = String(newVal)
-            .toUpperCase()
             .slice(0, this.maxLength)
             .replace(this.spaceRegex, '')
             .replace(this.specialCharacterRegex, '')
@@ -176,7 +175,6 @@ export default {
         // NO SPACE, NO SPECIAL CHARACTER, AND NO TEXT
         case !this.spaceAllowed && !this.charAllowed && !this.textAllowed:
           this.innerValue = String(newVal)
-            .toUpperCase()
             .slice(0, this.maxLength)
             .replace(this.spaceRegex, '')
             .replace(this.specialCharacterRegex, '')
@@ -185,14 +183,12 @@ export default {
         // NO SPACIAL CHARACHER ALONE
         case this.spaceAllowed && !this.charAllowed && this.textAllowed:
           this.innerValue = String(newVal)
-            .toUpperCase()
             .slice(0, this.maxLength)
             .replace(this.specialCharacterRegex, '')
           break
         // NO SPACIAL CHARACHER, NO TEXT
         case this.spaceAllowed && !this.charAllowed && !this.textAllowed:
           this.innerValue = String(newVal)
-            .toUpperCase()
             .slice(0, this.maxLength)
             .replace(this.specialCharacterRegex, '')
             .replace(this.textOnlyRegex, '')
@@ -200,7 +196,6 @@ export default {
         // NO TEXT ALONE
         case this.spaceAllowed && this.charAllowed && !this.textAllowed:
           this.innerValue = String(newVal)
-            .toUpperCase()
             .slice(0, this.maxLength)
             .replace(this.textOnlyRegex, '')
           break
@@ -210,16 +205,13 @@ export default {
           !this.textAllowed &&
           this.isNumber:
           this.innerValue = String(newVal)
-            .toUpperCase()
             .slice(0, this.maxLength)
             .replace(this.spaceRegex, '')
             .replace(this.specialCharacterRegex, '')
             .replace(this.textOnlyRegex, '')
           break
         default:
-          this.innerValue = String(newVal)
-            .toUpperCase()
-            .slice(0, this.maxLength)
+          this.innerValue = String(newVal).slice(0, this.maxLength)
           break
       }
       this.$nextTick(() => {

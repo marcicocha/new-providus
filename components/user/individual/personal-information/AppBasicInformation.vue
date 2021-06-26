@@ -117,7 +117,6 @@
           <AppInput
             v-model="personalInfoObject.dateOfBirth"
             label="Date of Birth"
-            input-type="date"
             disabled
           />
         </a-col>
@@ -159,7 +158,6 @@
           <AppTextArea
             v-model="personalInfoObject.contactAddress"
             label="Contact Address"
-            disabled
           />
         </a-col>
       </a-row>
@@ -213,7 +211,7 @@ export default {
       phoneNumber,
       lga,
       stateOfOrigin,
-      contactAddress,
+      // contactAddress,
     } = response
     this.personalInfoObject = {
       ...this.personalInfoObject,
@@ -228,7 +226,7 @@ export default {
       phoneNumber,
       lga,
       stateOfOrigin,
-      contactAddress,
+      // contactAddress,
     }
   },
   destroyed() {

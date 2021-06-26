@@ -14,7 +14,7 @@
         >
       </div>
       <p class="reference">
-        Have a reference Number?
+        Have a Reference Number?
         <nuxt-link to="/user/individual/upload-document">Click Here</nuxt-link>
       </p>
     </div>
