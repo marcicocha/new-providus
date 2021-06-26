@@ -50,9 +50,9 @@ export default {
         this.formLoading = true
         const requestId = this.$cookies.get('requestId')
         const formData = new FormData()
-        formData.append('file', file)
+        formData.append('selfie', file)
         formData.append('requestId', requestId)
-        await this.$axios.$post('/individual/selfieUpload', formData)
+        await this.$axios.$post('/individual/uploadSelfie', formData)
         this.formLoading = false
         this.$router.replace('/user/individual/upload')
       } catch (err) {
