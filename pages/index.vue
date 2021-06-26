@@ -13,6 +13,10 @@
           ><span>GET STARTED</span></nuxt-link
         >
       </div>
+      <p class="reference">
+        Have a reference Number?
+        <nuxt-link to="/user/individual/upload-document">Click Here</nuxt-link>
+      </p>
     </div>
   </div>
 </template>
@@ -85,12 +89,10 @@ p {
   line-height: 150%;
   color: #2e434e;
   text-align: center;
-  padding-top: 25px;
+  padding-top: 1rem;
 }
 .reference {
   text-align: left;
-
-  /* font-size: 14px; */
 }
 .homepage_button__padding {
   margin: 1.5rem 0;

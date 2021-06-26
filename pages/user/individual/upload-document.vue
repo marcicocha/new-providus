@@ -73,7 +73,6 @@ export default {
       this.referenceFile2 = file
     },
     async submitDocumentHandler() {
-      const response = this.$cookies.get('accountType')
       if (!this.referenceNumber) {
         notification.error({
           message: 'Error',
@@ -82,24 +81,22 @@ export default {
         })
         return
       }
-      if (response === 'CURRENT') {
-        if (!this.referenceFile1) {
-          notification.error({
-            message: 'Error',
-            description: 'Reference File 1 is Mandatory',
-            duration: 4000,
-          })
-          return
-        }
+      if (!this.referenceFile1) {
+        notification.error({
+          message: 'Error',
+          description: 'Reference File 1 is Mandatory',
+          duration: 4000,
+        })
+        return
+      }
 
-        if (!this.referenceFile2) {
-          notification.error({
-            message: 'Error',
-            description: 'Reference File 2 is Mandatory',
-            duration: 4000,
-          })
-          return
-        }
+      if (!this.referenceFile2) {
+        notification.error({
+          message: 'Error',
+          description: 'Reference File 2 is Mandatory',
+          duration: 4000,
+        })
+        return
       }
       try {
         this.message = ''

@@ -54,7 +54,7 @@ export default {
         formData.append('requestId', requestId)
         await this.$axios.$post('/individual/selfieUpload', formData)
         this.formLoading = false
-        this.$router.replace('/user/individual/personal-information')
+        this.$router.replace('/user/individual/upload')
       } catch (err) {
         this.formLoading = false
         const { default: errorHandler } = await import('@/utils/errorHandler')

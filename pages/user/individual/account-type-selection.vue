@@ -24,9 +24,12 @@
             placeholder="Enter Bank Verification Number"
             :disabled="isLoading"
             is-number
-            :max-length="11"
-            :min-length="11"
+            max-length="11"
+            min-length="11"
             required
+            :text-allowed="false"
+            :space-allowed="false"
+            :char-allowed="false"
           />
           <div style="height: 20px"></div>
           <AppButton
@@ -162,7 +165,12 @@ export default {
         })
       }
     },
-    backButtonHandler() {},
+    backButtonHandler() {
+      if (!this.isBvnDetails) {
+        this.$router.replace('/')
+      }
+      this.bvnDetails = {}
+    },
     async bvnValidationHandler() {
       if (
         !this.accountInformation ||
@@ -224,6 +232,9 @@ export default {
           }
           if (nextWorkFlow === 'KIN_DETAILS') {
             this.$router.replace('/user/individual/kin-information')
+          }
+          if (nextWorkFlow === 'SELFIE') {
+            this.$router.replace('/user/individual/capture-selfie')
           }
           if (nextWorkFlow === 'DOC_UPLOAD') {
             this.$router.replace('/user/individual/upload')

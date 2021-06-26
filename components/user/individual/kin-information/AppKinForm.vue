@@ -145,7 +145,7 @@ export default {
           requestId: response,
         }
         await this.$axios.$put('/individual/kinDetails', kinInfoObject)
-        this.$router.replace('/user/individual/upload')
+        this.$router.replace('/user/individual/capture-selfie')
       } catch (err) {
         const { default: errorHandler } = await import('@/utils/errorHandler')
         errorHandler(err).forEach((msg) => {
