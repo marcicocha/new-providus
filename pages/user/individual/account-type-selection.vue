@@ -254,6 +254,7 @@ export default {
           description: 'Please accept Terms and Condition to continue',
           duration: 4000,
         })
+        return
       }
       try {
         this.message = ''
