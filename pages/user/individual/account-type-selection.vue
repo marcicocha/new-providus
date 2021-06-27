@@ -106,8 +106,8 @@
       :destroy-on-close="true"
       @cancel="closeModal"
     >
-      <p v-for="(terms, i) in termsHighlight" :key="i">
-        {{ terms }}
+      <p v-for="(term, i) in termsHighlight" :key="i">
+        {{ term }}
       </p>
       <br />
       <AppButton @click="$router.replace('/user/terms-conditions')"
@@ -271,11 +271,13 @@ export default {
         let error
         const { default: errorHandler } = await import('@/utils/errorHandler')
         errorHandler(err).forEach((msg) => {
-          notification.error({
-            message: 'Error',
-            description: msg,
-            duration: 4000,
-          })
+          if (!msg.includes('already exist')) {
+            notification.error({
+              message: 'Error',
+              description: msg,
+              duration: 4000,
+            })
+          }
           error = msg
         })
         // BVN Already Exists

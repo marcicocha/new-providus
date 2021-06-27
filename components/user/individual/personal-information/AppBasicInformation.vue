@@ -158,6 +158,7 @@
           <AppTextArea
             v-model="personalInfoObject.contactAddress"
             label="Contact Address"
+            required
           />
         </a-col>
       </a-row>
@@ -285,6 +286,13 @@ export default {
         this.personalInfoObject.purposeOfAcc === undefined
       ) {
         this.errorMessageHandler('Purpose Of Account')
+        return
+      }
+      if (
+        this.personalInfoObject.contactAddress === '' ||
+        this.personalInfoObject.contactAddress === undefined
+      ) {
+        this.errorMessageHandler('Contact Address')
         return
       }
       this.basicInfoHandler()
