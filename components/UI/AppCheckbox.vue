@@ -1,19 +1,18 @@
 <template>
   <div class="full-checkbox">
-    <label class="checkbox">
-      <input
-        v-model="innerValue"
-        type="checkbox"
-        :disabled="disabled"
-        @blur="blurHandler"
-      />
-      {{ label }}
-    </label>
+    <a-form-item :required="required">
+      <a-checkbox v-model="innerValue" :disabled="disabled" @change="onChange">
+        {{ label }}
+      </a-checkbox>
+    </a-form-item>
   </div>
 </template>
 <script>
+import { Checkbox, Form } from 'ant-design-vue'
+import 'ant-design-vue/lib/checkbox/style/index.less'
 export default {
   name: 'AppCheckbox',
+  components: { 'a-checkbox': Checkbox, 'a-form-item': Form.Item },
   props: {
     value: {
       type: Boolean,
@@ -24,6 +23,10 @@ export default {
       default: '',
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    required: {
       type: Boolean,
       default: false,
     },
@@ -59,8 +62,9 @@ export default {
     }
   },
   methods: {
-    blurHandler(e) {
-      this.$emit('blur', this.innerValue)
+    onChange(e) {
+      console.log(this.innerValue, 'TEST')
+      this.$emit('change', this.innerValue)
     },
   },
 }

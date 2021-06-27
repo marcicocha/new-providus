@@ -31,6 +31,12 @@
             :space-allowed="false"
             :char-allowed="false"
           />
+          <AppCheckbox
+            v-model="terms"
+            label="I agree to the TERMS &amp; CONDITIONS"
+            style="margin-top: 1.5rem"
+            @change="changeHandler"
+          />
           <div style="height: 20px"></div>
           <AppButton
             type="primary"
@@ -92,6 +98,22 @@
         </a-row>
       </div>
     </div>
+    <a-modal
+      :visible="visible"
+      title="Terms and Condition"
+      width="360px"
+      :footer="null"
+      :destroy-on-close="true"
+      @cancel="closeModal"
+    >
+      <p v-for="(terms, i) in termsHighlight" :key="i">
+        {{ terms }}
+      </p>
+      <br />
+      <AppButton @click="$router.replace('/user/terms-conditions')"
+        >View More</AppButton
+      >
+    </a-modal>
   </div>
 </template>
 <script>
@@ -100,12 +122,15 @@ import AppTitleComponent from '@/components/UI/AppTitleComponent'
 // import AppCard from '@/components/user/individual/account-type-selection/AppCard'
 import AppInput from '@/components/UI/AppInput'
 import AppButton from '@/components/UI/AppButton'
+import AppCheckbox from '@/components/UI/AppCheckbox'
+
 export default {
   components: {
     AppTitleComponent,
     // AppCard,
     AppInput,
     AppButton,
+    AppCheckbox,
     'a-divider': Divider,
     'a-form': Form,
     'a-radio': Radio,
@@ -128,12 +153,18 @@ export default {
       baseUrl: process.env.BASE_URL,
       isBvnDetails: false,
       bvnDetails: {},
+      terms: false,
+      visible: false,
+      termsHighlight: [],
     }
   },
   destroyed() {
     notification.destroy()
   },
   methods: {
+    closeModal() {
+      this.visible = false
+    },
     returnHandler() {
       this.isBvnDetails = false
       this.bvnDetails = {}
@@ -144,6 +175,24 @@ export default {
     },
     getImgUrl(pic) {
       return `data:image/png;base64,${pic}`
+    },
+    async changeHandler(val) {
+      if (val) {
+        try {
+          const { response } = await this.$axios.$get('/terms/termsHighlight')
+          this.termsHighlight = [...response]
+          this.visible = true
+        } catch (err) {
+          const { default: errorHandler } = await import('@/utils/errorHandler')
+          errorHandler(err).forEach((msg) => {
+            notification.error({
+              message: 'Error',
+              description: msg,
+              duration: 4000,
+            })
+          })
+        }
+      }
     },
     nextHandler() {
       this.$router.replace('/user/individual/personal-information')
@@ -168,8 +217,10 @@ export default {
     backButtonHandler() {
       if (!this.isBvnDetails) {
         this.$router.replace('/')
+      } else {
+        this.bvnDetails = {}
+        this.isBvnDetails = false
       }
-      this.bvnDetails = {}
     },
     async bvnValidationHandler() {
       if (
@@ -195,7 +246,13 @@ export default {
         })
         return
       }
-
+      if (!this.terms) {
+        notification.error({
+          message: 'Error',
+          description: 'Please accept Terms and Condition to continue',
+          duration: 4000,
+        })
+      }
       try {
         this.message = ''
         this.isLoading = true

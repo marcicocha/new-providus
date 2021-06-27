@@ -92,3 +92,19 @@ ul {
 .ant-radio-inner::after {
   background: $primary;
 }
+.ant-checkbox-checked::after {
+  border: none !important;
+}
+.ant-checkbox-wrapper,
+.ant-radio-wrapper {
+  padding: 0 !important;
+}
+.ant-checkbox + span {
+  padding-right: 8px;
+  padding-left: 8px;
+  color: black;
+  font-size: 13px;
+}
+.ant-modal-title, .ant-modal-body {
+  font-weight: bold;
+}

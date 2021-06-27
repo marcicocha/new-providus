@@ -13,11 +13,11 @@
     />
     <div style="height: 20px"></div>
     <AppButton
-      title="Submit Reference ID"
       :disabled="!referenceId"
       :loading="isLoading"
       @click="referenceIdHandler"
-    />
+      >Submit Reference ID</AppButton
+    >
   </div>
 </template>
 <script>
