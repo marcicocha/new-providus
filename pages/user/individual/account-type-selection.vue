@@ -161,6 +161,21 @@ export default {
   destroyed() {
     notification.destroy()
   },
+  async mounted() {
+    try {
+      const { response } = await this.$axios.$get('/terms/termsHighlight')
+      this.termsHighlight = [...response]
+    } catch (err) {
+      const { default: errorHandler } = await import('@/utils/errorHandler')
+      errorHandler(err).forEach((msg) => {
+        notification.error({
+          message: 'Error',
+          description: msg,
+          duration: 4000,
+        })
+      })
+    }
+  },
   methods: {
     closeModal() {
       this.visible = false
@@ -176,22 +191,9 @@ export default {
     getImgUrl(pic) {
       return `data:image/png;base64,${pic}`
     },
-    async changeHandler(val) {
+    changeHandler(val) {
       if (val) {
-        try {
-          const { response } = await this.$axios.$get('/terms/termsHighlight')
-          this.termsHighlight = [...response]
-          this.visible = true
-        } catch (err) {
-          const { default: errorHandler } = await import('@/utils/errorHandler')
-          errorHandler(err).forEach((msg) => {
-            notification.error({
-              message: 'Error',
-              description: msg,
-              duration: 4000,
-            })
-          })
-        }
+        this.visible = true
       }
     },
     nextHandler() {
@@ -348,7 +350,7 @@ export default {
   }
 }
 .parent-container {
-  width: 90%;
+  // width: 90%;
   position: relative;
 }
 .notification {
@@ -367,7 +369,7 @@ export default {
     padding-top: 0;
   }
   .parent-container {
-    width: 90%;
+    // width: 90%;
     position: relative;
   }
 }

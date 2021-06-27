@@ -228,7 +228,7 @@ footer {
   }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 1024px) {
   .web_footer {
     display: none;
   }
@@ -265,55 +265,55 @@ footer {
   }
 }
 
-@media only screen and (min-width: 769px) and (max-width: 1024px) {
-  .wrapper_container {
-    display: grid;
-    grid-template-rows: 13% auto 13%;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 80px;
-    width: 45vw;
-    height: 85vh;
-    margin: auto;
-    background-color: #fff;
-  }
-  header {
-    text-align: right;
-    padding: 20px 30px;
-    // padding: 17px 30px;
-    img {
-      height: 100%;
-    }
-  }
-  .card {
-    height: 150px !important;
-  }
-  .parent-container {
-    width: 100% !important;
-    position: relative;
-  }
-  .page_container {
-    padding: 0 30px;
-  }
-  .web_footer {
-    display: block;
-  }
-  .mobile_footer {
-    display: none;
-  }
-  .account-info__block {
-    width: 100%;
-    padding-top: 0;
-  }
-  .back-button {
-    display: inline;
-    align-content: center;
-    position: absolute;
-    right: 41px;
-    margin-top: 7px;
-  }
-}
+// @media only screen and (min-width: 769px) and (max-width: 1024px) {
+//   .wrapper_container {
+//     display: grid;
+//     grid-template-rows: 13% auto 13%;
+//     position: absolute;
+//     top: 0;
+//     bottom: 0;
+//     right: 80px;
+//     width: 45vw;
+//     height: 85vh;
+//     margin: auto;
+//     background-color: #fff;
+//   }
+//   header {
+//     text-align: right;
+//     padding: 20px 30px;
+//     // padding: 17px 30px;
+//     img {
+//       height: 100%;
+//     }
+//   }
+//   .card {
+//     height: 150px !important;
+//   }
+//   .parent-container {
+//     width: 100% !important;
+//     position: relative;
+//   }
+//   .page_container {
+//     padding: 0 30px;
+//   }
+//   .web_footer {
+//     display: block;
+//   }
+//   .mobile_footer {
+//     display: none;
+//   }
+//   .account-info__block {
+//     width: 100%;
+//     padding-top: 0;
+//   }
+//   .back-button {
+//     display: inline;
+//     align-content: center;
+//     position: absolute;
+//     right: 41px;
+//     margin-top: 7px;
+//   }
+// }
 
 @media only screen and (min-width: 1025px) {
   .wrapper_container {

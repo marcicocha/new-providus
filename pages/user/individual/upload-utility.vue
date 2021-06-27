@@ -114,9 +114,9 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.parent-container {
-  width: 85%;
-}
+// .parent-container {
+//   width: 85%;
+// }
 h4 {
   text-align: center;
   font-weight: 600;
