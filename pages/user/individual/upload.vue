@@ -40,6 +40,7 @@
     <div>
       <AppButton
         v-if="isIdSuccess && isSignatureSuccess && isUtilitySuccess"
+        :loading="isLoading"
         @click="submitHandler"
         >Submit Document</AppButton
       >
@@ -54,6 +55,11 @@ import AppButton from '@/components/UI/AppButton'
 export default {
   components: {
     AppButton,
+  },
+  data() {
+    return {
+      isLoading: false,
+    }
   },
   computed: {
     isIdSuccess() {
@@ -82,6 +88,7 @@ export default {
   },
   methods: {
     async submitHandler() {
+      this.isLoading = true
       try {
         const response = this.$cookies.get('requestId')
         const formData = new FormData()
@@ -92,8 +99,10 @@ export default {
         formData.append('signature', this.signatureFile)
         const config = { headers: { 'Content-Type': 'multipart/form-data' } }
         await this.$axios.$post('/individual/uploadDocuments', formData, config)
+        this.isLoading = false
         this.$router.replace('/user/individual/liveness-check')
       } catch (err) {
+        this.isLoading = false
         const { default: errorHandler } = await import('@/utils/errorHandler')
         errorHandler(err).forEach((msg) => {
           notification.error({
