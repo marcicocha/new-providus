@@ -116,7 +116,7 @@
         {{ term }}
       </p>
       <br />
-      <AppButton @click="$router.replace('/user/terms-conditions')"
+      <AppButton @click="$router.push('/user/terms-conditions')"
         >View More</AppButton
       >
     </a-modal>
