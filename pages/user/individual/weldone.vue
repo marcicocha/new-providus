@@ -24,6 +24,15 @@
         </div>
       </div>
       <AppButton @click="saveHandler">Go back to Website</AppButton>
+      <br />
+      <div
+        v-if="accountType === 'CURRENT'"
+        style="margin-top: 20px; font-size: 14px"
+      >
+        <nuxt-link to="/user/individual/upload-document"
+          ><span>Click here for Reference Upload</span></nuxt-link
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -37,12 +46,22 @@ export default {
   data() {
     return {
       name: 'David',
+      accountType: '',
     }
   },
   computed: {
     ...mapState({
       accountNo: (state) => state.accountNumber,
     }),
+  },
+  async mounted() {
+    const requestId = this.$cookies.get('requestId')
+    this.requestId = requestId
+    const { response } = await this.$axios.$get(
+      `/individual/requestId?requestId=${requestId}`
+    )
+    const { accountType } = response
+    this.accountType = accountType
   },
   methods: {
     saveHandler() {
