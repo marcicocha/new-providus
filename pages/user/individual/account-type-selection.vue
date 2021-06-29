@@ -49,6 +49,12 @@
           <p :class="{ notification: true, error_message: message }">
             <span style="display: block">{{ message }}</span>
             <span>Dial *565*0# to check your Bank Verification Number</span>
+            <br />
+            Two Reference forms are required to open a Current Account,
+            <a :href="baseUrl + `/forms/download/referenceForm`" download
+              >click here</a
+            >
+            to download, fill and make ready for upload.
           </p>
         </a-form>
       </div>

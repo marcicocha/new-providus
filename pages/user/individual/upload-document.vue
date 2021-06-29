@@ -2,16 +2,15 @@
   <div>
     <AppTitleComponent heading="Final Steps" />
     <div>
-      <hr />
       <div>
         <AppInput v-model="referenceNumber" required label="Reference Number" />
         <AppUpload
-          :label="accountTypeLabel"
+          label="Reference Form 1"
           :extension="['.docx', '.pdf']"
           @fileUploadHandler="fileUploadReference1Handler"
         />
         <AppUpload
-          :label="accountTypeLabel2"
+          label="Reference Form 2"
           :extension="['.docx', '.pdf']"
           @fileUploadHandler="fileUploadReference2Handler"
         />
@@ -20,6 +19,13 @@
         >
       </div>
     </div>
+    <p class="notification">
+      Two Reference forms are required to open a Current Account,
+      <a :href="baseUrl + `/forms/download/referenceForm`" download
+        >click here</a
+      >
+      to download, fill and make ready for upload.
+    </p>
   </div>
 </template>
 <script>
@@ -42,25 +48,8 @@ export default {
       referenceFile2: null,
       loading: false,
       referenceNumber: '',
+      baseUrl: process.env.BASE_URL,
     }
-  },
-  computed: {
-    accountTypeLabel() {
-      const response = this.$cookies.get('accountType')
-
-      if (response === 'CURRENT') {
-        return 'Reference Form 1'
-      }
-      return 'Reference Form 1 (optional)'
-    },
-    accountTypeLabel2() {
-      const response = this.$cookies.get('accountType')
-
-      if (response === 'CURRENT') {
-        return 'Reference Form 2'
-      }
-      return 'Reference Form 2 (optional)'
-    },
   },
   destroyed() {
     notification.destroy()
@@ -129,3 +118,11 @@ export default {
   },
 }
 </script>
+<style lang="scss" scoped>
+.notification {
+  position: absolute;
+  bottom: 4%;
+  font-weight: bold;
+  font-size: 14px;
+}
+</style>
