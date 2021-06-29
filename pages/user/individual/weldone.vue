@@ -1,7 +1,7 @@
 <template>
   <div class="child-container">
     <div style="margin-top: -15px; width: 70%">
-      <div v-if="typeof accountNo === 'number'">
+      <div>
         <img src="@/assets/images/fire-cracker.svg" />
       </div>
 
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapState({
-      accountNo: (state) => state.individualModule.accountNumber,
+      accountNo: (state) => state.accountNumber,
     }),
   },
   methods: {

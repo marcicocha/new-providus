@@ -262,7 +262,7 @@ export default {
       }
     },
     ...mapActions({
-      accountNumberHandler: 'individualModule/SAVE_ACCOUNT_NUMBER',
+      accountNumberHandler: 'SAVE_ACCOUNT_NUMBER',
     }),
   },
 }
