@@ -4,10 +4,7 @@
       ><img src="~assets/images/back-arrow.svg" alt="back-button" />
       <span>Back</span></a
     >
-    <AppTitleComponent
-      heading="Capture ID"
-      description="Place ID within the edges of the rectangle."
-    />
+    <AppTitleComponent heading="Capture ID" description="Please Capture ID" />
 
     <AppCaptureId :key="counter" />
   </div>
