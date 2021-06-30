@@ -74,14 +74,14 @@ export default {
         return
       }
       const extensionStatus = this.extensionHandler(file.name)
-      if (extensionStatus && file.size < 3145728) {
+      if (extensionStatus && file.size < 5000000) {
         this.file = file
         this.$emit('fileUploadHandler', this.file)
-      } else if (file.size > 3145728) {
+      } else if (file.size > 5000000) {
         this.file = null
         notification.error({
           message: 'Error',
-          description: 'Input File must not be Larger than 635KB',
+          description: 'Uploaded File cannot be more than 5MB',
           duration: 4000,
         })
       } else if (!extensionStatus) {

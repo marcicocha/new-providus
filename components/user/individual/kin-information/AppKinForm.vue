@@ -14,6 +14,7 @@
                 value: resp,
               })
             "
+            required
           />
         </a-col>
         <a-col :span="12">
@@ -62,6 +63,7 @@
             v-model="kinInfoObject.phoneNumber"
             label="Phone Number"
             placeholder="Phone Number"
+            is-number
           />
         </a-col>
         <a-col :span="24">
@@ -107,6 +109,13 @@ export default {
   },
   methods: {
     kinDetailsHandler() {
+      if (
+        this.kinInfoObject.title === undefined ||
+        this.kinInfoObject.title === ''
+      ) {
+        this.errorMessageHandler('Title')
+        return
+      }
       if (
         this.kinInfoObject.surname === undefined ||
         this.kinInfoObject.surname === ''

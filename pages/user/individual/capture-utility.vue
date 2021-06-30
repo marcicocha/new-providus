@@ -6,7 +6,7 @@
     >
     <AppTitleComponent
       heading="Capture Utility Bill"
-      description="Please capture a valid utility bill not later than 3 months."
+      description="Please capture a valid utility bill not older than 3 months."
     />
     <AppCaptureUtility :key="counter" />
   </div>

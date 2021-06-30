@@ -144,7 +144,7 @@
             disabled
           />
         </a-col>
-        <a-col :span="12">
+        <!-- <a-col :span="12">
           <AppInput
             v-model="personalInfoObject.stateOfOrigin"
             label="State"
@@ -153,7 +153,7 @@
         </a-col>
         <a-col :span="12">
           <AppInput v-model="personalInfoObject.lga" label="LGA" disabled />
-        </a-col>
+        </a-col> -->
         <a-col :span="24">
           <AppTextArea
             v-model="personalInfoObject.contactAddress"
@@ -210,8 +210,8 @@ export default {
       dateOfBirth,
       email,
       phoneNumber,
-      lga,
-      stateOfOrigin,
+      // lga,
+      // stateOfOrigin,
       // contactAddress,
     } = response
     this.personalInfoObject = {
@@ -225,8 +225,8 @@ export default {
       dateOfBirth,
       email,
       phoneNumber,
-      lga,
-      stateOfOrigin,
+      // lga,
+      // stateOfOrigin,
       // contactAddress,
     }
   },
