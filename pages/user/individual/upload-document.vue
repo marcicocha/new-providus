@@ -92,14 +92,14 @@ export default {
         this.loading = true
         const formData = new FormData()
         if (this.referenceFile1) {
-          formData.append('referenceForm1', this.referenceFile1)
+          formData.append('reference1', this.referenceFile1)
         }
         if (this.referenceFile2) {
-          formData.append('referenceForm2', this.referenceFile2)
+          formData.append('reference2', this.referenceFile2)
         }
         formData.append('referenceNumber', this.referenceNumber)
         await this.$axios.$post('/individual/uploadReferences', formData)
-        this.$router.replace('/user/individual/weldone')
+        this.$router.replace('/')
         this.loading = false
       } catch (err) {
         this.loading = false
