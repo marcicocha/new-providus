@@ -166,6 +166,10 @@ export default {
     notification.destroy()
   },
   async mounted() {
+    const bvn = this.$cookies.get('bvn')
+    if (bvn) {
+      this.accountInformation.BVN = bvn
+    }
     try {
       const { response } = await this.$axios.$get('/terms/termsHighlight')
       this.termsHighlight = [...response]
@@ -178,10 +182,6 @@ export default {
           duration: 4000,
         })
       })
-    }
-    const bvn = this.$cookies.get('bvn')
-    if (bvn) {
-      this.accountInformation.BVN = bvn
     }
   },
   methods: {

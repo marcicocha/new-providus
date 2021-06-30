@@ -90,7 +90,6 @@ export default {
       try {
         this.message = ''
         this.loading = true
-        const response = this.$cookies.get('requestId')
         const formData = new FormData()
         if (this.referenceFile1) {
           formData.append('referenceForm1', this.referenceFile1)
@@ -99,7 +98,6 @@ export default {
           formData.append('referenceForm2', this.referenceFile2)
         }
         formData.append('referenceNumber', this.referenceNumber)
-        formData.append('requestId', response)
         await this.$axios.$post('/individual/uploadReferences', formData)
         this.$router.replace('/user/individual/weldone')
         this.loading = false
