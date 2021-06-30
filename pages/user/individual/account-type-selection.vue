@@ -116,9 +116,7 @@
         {{ term }}
       </p>
       <br />
-      <AppButton @click="$router.push('/user/terms-conditions')"
-        >View More</AppButton
-      >
+      <AppButton @click="viewMoreTermsHandler">View More</AppButton>
     </a-modal>
   </div>
 </template>
@@ -181,8 +179,16 @@ export default {
         })
       })
     }
+    const bvn = this.$cookies.get('bvn')
+    if (bvn) {
+      this.accountInformation.BVN = bvn
+    }
   },
   methods: {
+    viewMoreTermsHandler() {
+      this.$cookies.set('bvn', this.accountInformation.BVN)
+      this.$router.push('/user/terms-conditions')
+    },
     closeModal() {
       this.visible = false
     },
