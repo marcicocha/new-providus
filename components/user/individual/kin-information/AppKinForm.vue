@@ -64,6 +64,9 @@
             label="Phone Number"
             placeholder="Phone Number"
             is-number
+            :text-allowed="false"
+            :space-allowed="false"
+            :char-allowed="false"
           />
         </a-col>
         <a-col :span="24">

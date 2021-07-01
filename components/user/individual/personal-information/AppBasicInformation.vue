@@ -125,6 +125,10 @@
             v-model="personalInfoObject.phoneNumber"
             label="Phone Number"
             disabled
+            is-number
+            :text-allowed="false"
+            :space-allowed="false"
+            :char-allowed="false"
           />
         </a-col>
         <a-col :span="12">
@@ -132,9 +136,12 @@
             v-model="personalInfoObject.altPhoneNumber"
             label="Alt Phone Number"
             placeholder="Alt Enter Number"
-            is-phone
             :max-length="15"
             :min-length="7"
+            is-number
+            :text-allowed="false"
+            :space-allowed="false"
+            :char-allowed="false"
           />
         </a-col>
         <a-col :span="24">
