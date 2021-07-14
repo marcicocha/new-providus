@@ -2,7 +2,7 @@
   <div class="parent-container">
     <AppTitleComponent
       heading="Upload Utility Bill"
-      description="Please upload a valid utilily bill not later than 3 months"
+      description="Please upload a valid utilily bill not older than 3 months"
     />
     <br />
     <div>
@@ -91,7 +91,6 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 4000,
           })
         })
       }

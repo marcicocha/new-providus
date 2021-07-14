@@ -62,7 +62,6 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 4000,
           })
         })
         // let errorMessage = 'Network Error'
@@ -71,7 +70,7 @@ export default {
         //   this.$toast.open({
         //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
         //     type: 'error',
-        //     duration: 4000,
+        //
         //     dismissible: true,
         //   })
         //   return
@@ -94,7 +93,7 @@ export default {
         //   this.$toast.open({
         //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
         //     type: 'error',
-        //     duration: 4000,
+        //
         //     dismissible: true,
         //   })
         // }

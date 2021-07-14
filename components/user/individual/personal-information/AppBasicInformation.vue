@@ -125,10 +125,6 @@
             v-model="personalInfoObject.phoneNumber"
             label="Phone Number"
             disabled
-            is-number
-            :text-allowed="false"
-            :space-allowed="false"
-            :char-allowed="false"
           />
         </a-col>
         <a-col :span="12">
@@ -247,7 +243,6 @@ export default {
       notification.error({
         message: 'Error',
         description: this.message,
-        duration: 4000,
       })
     },
     submitBasicInformationHandler() {
@@ -327,7 +322,6 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 4000,
           })
         })
       }

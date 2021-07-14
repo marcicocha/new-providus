@@ -158,7 +158,6 @@ export default {
         notification.error({
           message: 'Error',
           description: msg,
-          duration: 4000,
         })
       })
       // let errorMessage = 'Network Error'
@@ -168,7 +167,7 @@ export default {
       //   this.$toast.open({
       //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
       //     type: 'error',
-      //     duration: 4000,
+      //
       //     dismissible: true,
       //   })
       //   return
@@ -191,7 +190,7 @@ export default {
       //   this.$toast.open({
       //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
       //     type: 'error',
-      //     duration: 4000,
+      //
       //     dismissible: true,
       //   })
       // }
@@ -230,7 +229,6 @@ export default {
           notification.error({
             message: errorMessage,
             description: customMessage,
-            duration: 4000,
           })
           document.getElementById('videocontainer').style.opacity = '0.04'
           document.getElementById('videocontainer').style.color = '#ed143d'
@@ -256,7 +254,6 @@ export default {
           notification.error({
             message: 'Error',
             description: errorMessage,
-            duration: 4000,
           })
         }
       }

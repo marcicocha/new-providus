@@ -66,7 +66,6 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Reference Number is Mandatory',
-          duration: 4000,
         })
         return
       }
@@ -74,7 +73,6 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Reference File 1 is Mandatory',
-          duration: 4000,
         })
         return
       }
@@ -83,7 +81,6 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Reference File 2 is Mandatory',
-          duration: 4000,
         })
         return
       }
@@ -108,7 +105,6 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 4000,
           })
         })
       }

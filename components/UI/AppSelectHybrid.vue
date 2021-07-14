@@ -240,7 +240,7 @@ export default {
               message: `<p class="toast-title">Error Message</p>
                     <p class="toast-msg"> ${errorMessage} </p>`,
               type: 'error',
-              duration: 4000,
+
               dismissible: true,
             })
           }

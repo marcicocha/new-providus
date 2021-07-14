@@ -179,7 +179,6 @@ export default {
         notification.error({
           message: 'Error',
           description: msg,
-          duration: 4000,
         })
       })
     }
@@ -223,7 +222,6 @@ export default {
           notification.error({
             message: 'Error',
             description: msg,
-            duration: 4000,
           })
         })
       }
@@ -246,7 +244,6 @@ export default {
         notification.error({
           message: 'BVN Validation Message',
           description: this.message,
-          duration: 4000,
         })
         return
       }
@@ -256,7 +253,6 @@ export default {
         notification.error({
           message: 'BVN Validation Message',
           description: this.message,
-          duration: 4000,
         })
         return
       }
@@ -264,7 +260,6 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Please accept Terms and Condition to continue',
-          duration: 4000,
         })
         return
       }
@@ -288,7 +283,6 @@ export default {
             notification.error({
               message: 'Error',
               description: msg,
-              duration: 4000,
             })
           }
           error = msg

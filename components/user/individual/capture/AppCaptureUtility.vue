@@ -140,7 +140,6 @@ export default {
           notification.error({
             message: errorMessage,
             description: customMessage,
-            duration: 4000,
           })
           return
         }
@@ -162,7 +161,6 @@ export default {
           notification.error({
             message: 'Error',
             description: errorMessage,
-            duration: 4000,
           })
         }
       }
@@ -195,7 +193,6 @@ export default {
             notification.error({
               message: errorMessage,
               description: customMessage,
-              duration: 4000,
             })
             return
           }
@@ -217,7 +214,6 @@ export default {
             notification.error({
               message: 'Error',
               description: errorMessage,
-              duration: 4000,
             })
           }
         })
@@ -239,7 +235,6 @@ export default {
             notification.error({
               message: errorMessage,
               description: customMessage,
-              duration: 4000,
             })
             return
           }
@@ -261,7 +256,6 @@ export default {
             notification.error({
               message: 'Error',
               description: errorMessage,
-              duration: 4000,
             })
           }
         })

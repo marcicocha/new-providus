@@ -82,14 +82,12 @@ export default {
         notification.error({
           message: 'Error',
           description: 'Uploaded File cannot be more than 5MB',
-          duration: 4000,
         })
       } else if (!extensionStatus) {
         this.file = null
         notification.error({
           message: 'Error',
           description: `You can only upload ${this.extension.toString()} file`,
-          duration: 4000,
         })
       }
     },
