@@ -131,7 +131,7 @@
           <AppInput
             v-model="personalInfoObject.altPhoneNumber"
             label="Alt Phone Number"
-            placeholder="Alt Enter Number"
+            placeholder="Alt Enter Nu    mber"
             :max-length="15"
             :min-length="7"
             is-number
@@ -144,7 +144,9 @@
           <AppInput
             v-model.trim="personalInfoObject.email"
             label="Email Address"
-            disabled
+            required
+            placeholder="Enter Email address"
+            max-length="100"
           />
         </a-col>
         <!-- <a-col :span="12">
@@ -295,6 +297,13 @@ export default {
         this.personalInfoObject.contactAddress === undefined
       ) {
         this.errorMessageHandler('Contact Address')
+        return
+      }
+      if (
+        this.personalInfoObject.email === '' ||
+        this.personalInfoObject.email === undefined
+      ) {
+        this.errorMessageHandler('Email')
         return
       }
       this.basicInfoHandler()

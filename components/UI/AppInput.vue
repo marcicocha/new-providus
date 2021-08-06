@@ -200,10 +200,7 @@ export default {
             .replace(this.textOnlyRegex, '')
           break
         // NO TEXT NO SPECIAL CHARACTER
-        case !this.spaceAllowed &&
-          !this.charAllowed &&
-          !this.textAllowed &&
-          this.isNumber:
+        case this.isNumber:
           this.innerValue = String(newVal)
             .slice(0, this.maxLength)
             .replace(this.spaceRegex, '')
