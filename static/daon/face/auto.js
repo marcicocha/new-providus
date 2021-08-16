@@ -117,7 +117,12 @@ video.onloadedmetadata = function () {
   const settings = video.srcObject.getVideoTracks()[0].getSettings()
   c.width = video.videoWidth
   c.height = settings.height
-
+  ctx.clearRect(0, 0, c.width, c.height)
+  ctx.lineWidth = '3'
+  ctx.strokeStyle = '#0FEB13'
+  ctx.beginPath()
+  ctx.rect(coords.x, coords.y, coords.width, coords.height)
+  ctx.stroke()
   text.innerHTML =
     'Width: ' +
     settings.width +
