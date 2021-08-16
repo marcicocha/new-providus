@@ -230,7 +230,7 @@ select {
   top: 0;
   left: 0;
   z-index: 5;
-  transform: scaleX(0.9);
+  transform: scale(0.8, 0.9);
   background-color: transparent;
   border: 2px solid #0feb13;
   border-radius: 50%;
