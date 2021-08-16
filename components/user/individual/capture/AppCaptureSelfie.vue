@@ -15,7 +15,12 @@
         class="canvas"
       ></canvas>
     </div>
-
+    <div id="face-coord" class="mbtn">
+      <span
+        >Face coords:
+        <pre id="face-coords"></pre>
+      </span>
+    </div>
     <!-- Hidden UI Please dont touch-->
     <div id="controls">
       <p id="video-settings" style="width: 100%; overflow: hidden"></p>
