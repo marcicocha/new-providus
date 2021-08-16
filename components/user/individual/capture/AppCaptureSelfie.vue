@@ -72,8 +72,8 @@
   </div>
 </template>
 <script>
-import AppButton from '@/components/UI/AppButton'
 import { notification, Row, Col } from 'ant-design-vue'
+import AppButton from '@/components/UI/AppButton'
 export default {
   name: 'AppCaptureSelfie',
   components: {
@@ -241,8 +241,7 @@ select {
   left: 0;
   float: left;
   font-size: 9px;
-
-  /* visibility: hidden; */
+  visibility: hidden;
 }
 .sl,
 #face-coord {
