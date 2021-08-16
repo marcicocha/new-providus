@@ -89,7 +89,7 @@ function captureSingle() {
     const c2 = document.getElementById('face-captured')
     const ctx2 = c2.getContext('2d')
     const image = document.querySelector('#image')
-    ctx2.drawImage(image, 33, 71, 104, 124, 21, 20, 87, 104)
+    ctx2.drawImage(image, 21, 20, 320, 500)
     document.blob = blob
   })
 }
