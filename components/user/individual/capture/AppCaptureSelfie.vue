@@ -9,6 +9,7 @@
         style="width: 100%"
       ></video>
       <img v-show="selfieCapture" id="image" class="animated fadeIn" />
+      <canvas id="face-captured"></canvas>
       <canvas
         v-show="!selfieCapture"
         id="face-detected-cv"
