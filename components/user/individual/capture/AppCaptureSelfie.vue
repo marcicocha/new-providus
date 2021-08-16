@@ -230,10 +230,10 @@ select {
   top: 0;
   left: 0;
   z-index: 5;
-  transform: scaleX(-1);
+  transform: scaleX(-2);
   background-color: transparent;
   border: 2px solid #0feb13;
-  border-radius: 40%;
+  border-radius: 50%;
 }
 .mbtn,
 #controls {
