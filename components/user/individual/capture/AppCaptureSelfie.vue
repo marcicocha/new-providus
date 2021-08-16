@@ -15,12 +15,7 @@
         class="canvas"
       ></canvas>
     </div>
-    <div id="face-coord" class="mbtn">
-      <span
-        >Face coords:
-        <pre id="face-coords"></pre>
-      </span>
-    </div>
+
     <!-- Hidden UI Please dont touch-->
     <div id="controls">
       <p id="video-settings" style="width: 100%; overflow: hidden"></p>
@@ -246,7 +241,8 @@ select {
   left: 0;
   float: left;
   font-size: 9px;
-  visibility: hidden;
+
+  /* visibility: hidden; */
 }
 .sl,
 #face-coord {
