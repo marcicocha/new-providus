@@ -9,7 +9,11 @@
         style="width: 100%"
       ></video>
       <img v-show="selfieCapture" id="image" class="animated fadeIn" />
-      <canvas id="face-captured"></canvas>
+      <canvas
+        v-show="selfieCapture"
+        id="face-captured"
+        class="canvas-2"
+      ></canvas>
       <canvas
         v-show="!selfieCapture"
         id="face-detected-cv"
@@ -223,6 +227,10 @@ select {
   display: inline-block;
   width: 100%;
   float: left;
+}
+.canvas-2 {
+  width: 100%;
+  height: auto;
 }
 .canvas {
   width: 100%;
