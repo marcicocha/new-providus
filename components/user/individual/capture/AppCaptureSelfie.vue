@@ -237,7 +237,7 @@ select {
 }
 .canvas-2 {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 .canvas {
   width: 100%;
