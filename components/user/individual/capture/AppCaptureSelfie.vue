@@ -233,6 +233,7 @@ select {
   transform: scaleX(-1);
   background-color: transparent;
   border: 2px solid #0feb13;
+  border-radius: 40%;
 }
 .mbtn,
 #controls {
