@@ -169,7 +169,14 @@ export default {
       document.querySelector('#start-capture-single').click()
       this.selfieCapture = true
       setTimeout(() => {
-        this.imgSrc = document.querySelector('#image').src
+        // this.imgSrc = document.querySelector('#image').src
+        const image = document.querySelector('#image')
+        image.onload = function () {
+          const c2 = document.getElementById('face-captured')
+          const ctx2 = c2.getContext('2d')
+          const image = document.querySelector('#image')
+          ctx2.drawImage(image, 33, 71, 400, 700, 0, 0, 360, 800)
+        }
       }, 500)
     },
     returnHandler() {

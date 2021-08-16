@@ -85,16 +85,7 @@ function stopCapture() {
 
 function captureSingle() {
   fc.captureFrame().then((blob) => {
-    // document.querySelector('#image').src = URL.createObjectURL(blob)
-    const image = document.querySelector('#image')
-    image.src = URL.createObjectURL(blob)
-    image.onload = function () {
-      const c2 = document.getElementById('face-captured')
-      const ctx2 = c2.getContext('2d')
-      const image = document.querySelector('#image')
-      ctx2.drawImage(image, 33, 71, 300, 500, 0, 0, 360, 300)
-    }
-
+    document.querySelector('#image').src = URL.createObjectURL(blob)
     document.blob = blob
   })
 }
