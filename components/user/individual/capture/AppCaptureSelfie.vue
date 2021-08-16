@@ -231,6 +231,8 @@ select {
   left: 0;
   z-index: 5;
   transform: scaleX(-1);
+  background-color: transparent;
+  border: 2px solid #0feb13;
 }
 .mbtn,
 #controls {
