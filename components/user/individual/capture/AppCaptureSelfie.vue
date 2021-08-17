@@ -9,11 +9,11 @@
         style="width: 100%"
       ></video>
       <img v-show="selfieCapture" id="image" class="animated fadeIn" />
-      <canvas
+      <!-- <canvas
         v-show="selfieCapture"
         id="face-captured"
         class="canvas-2"
-      ></canvas>
+      ></canvas> -->
       <canvas
         v-show="!selfieCapture"
         id="face-detected-cv"
@@ -168,13 +168,13 @@ export default {
       //  this.$emit('submitCapturehandler')
       document.querySelector('#start-capture-single').click()
       this.selfieCapture = true
-      const image = document.querySelector('#image')
-      image.onload = function () {
-        const c2 = document.getElementById('face-captured')
-        const ctx2 = c2.getContext('2d')
-        const image = document.querySelector('#image')
-        ctx2.drawImage(image, 33, 71, 400, 700, 0, 0, 360, 800)
-      }
+      // const image = document.querySelector('#image')
+      // image.onload = function () {
+      //   const c2 = document.getElementById('face-captured')
+      //   const ctx2 = c2.getContext('2d')
+      //   const image = document.querySelector('#image')
+      //   ctx2.drawImage(image, 33, 71, 400, 700, 0, 0, 360, 800)
+      // }
       setTimeout(() => {
         this.imgSrc = document.querySelector('#image').src
       }, 500)
