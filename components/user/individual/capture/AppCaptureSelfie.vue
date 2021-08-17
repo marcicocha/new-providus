@@ -61,6 +61,7 @@
     <AppButton v-if="!selfieCapture" @click="submitCaptureHandler"
       >Capture Selfie</AppButton
     >
+    <br />
     <a-row v-if="selfieCapture" type="flex" :gutter="24">
       <a-col :span="12">
         <AppButton class="secondary-btn" @click="returnHandler"
