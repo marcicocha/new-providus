@@ -252,7 +252,7 @@ select {
   background: radial-gradient(
     circle,
     rgba(0, 0, 0, 0.14754098360655743) 54%,
-    rgba(0, 0, 0, 0.5622950819672132) 62%
+    rgba(0, 0, 0, 0.6222950819672132) 62%
   );
 }
 .mbtn,
