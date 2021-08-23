@@ -177,7 +177,7 @@ export default {
         const ctx2 = c2.getContext('2d')
         const image = document.querySelector('#image')
         alert(c2.width)
-        ctx2.drawImage(image, 30, 71, 130, 200, 0, 0, c2.width, c2.height)
+        ctx2.drawImage(image, 30, 71, 180, 250, 0, 0, c2.width, c2.height)
       }
       // setTimeout(() => {
       //   this.imgSrc = document.querySelector('#image').src
@@ -241,7 +241,8 @@ select {
 }
 .canvas-2 {
   width: 100%;
-  height: 500px;
+  height: 400px;
+  transform: scaleX(-1);
 }
 .canvas {
   width: 100%;
