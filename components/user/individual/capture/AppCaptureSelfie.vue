@@ -176,8 +176,7 @@ export default {
         const c2 = document.getElementById('face-captured')
         const ctx2 = c2.getContext('2d')
         const image = document.querySelector('#image')
-        alert(c2.width)
-        ctx2.drawImage(image, 30, 71, 180, 250, 0, 0, c2.width, c2.height)
+        ctx2.drawImage(image, 30, 50, 250, 320, 0, 0, c2.width, c2.height)
       }
       // setTimeout(() => {
       //   this.imgSrc = document.querySelector('#image').src
