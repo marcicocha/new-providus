@@ -8,11 +8,13 @@
         playsinline
         style="width: 100%"
       ></video>
+      <img v-show="false" id="image" class="animated fadeIn" />
+
       <!-- <img v-show="selfieCapture" id="image" class="animated fadeIn" /> -->
       <canvas
         v-show="selfieCapture"
         id="face-captured"
-        class="canvas-2"
+        class="canvas-2 animated fadeIn"
       ></canvas>
       <canvas
         v-show="!selfieCapture"
