@@ -197,10 +197,11 @@ export default {
       const img = document.querySelector('#image4')
       const res = await fetch(img.src)
       const blob = await res.blob()
-      const file = new File([blob], 'selfie.jpg', {
+      const file = new File([blob], 'selfie.png', {
         lastModified: new Date().getTime(),
         type: 'image/png',
       })
+      console.log(file, 'FILE ')
       // const blob = document.blob
       // const file = new File([blob], 'selfie.jpg', {
       //   lastModified: new Date().getTime(),
