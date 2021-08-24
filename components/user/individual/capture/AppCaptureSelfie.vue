@@ -11,6 +11,7 @@
       <img v-show="false" id="image" class="animated fadeIn" />
 
       <!-- <img v-show="selfieCapture" id="image" class="animated fadeIn" /> -->
+      <img v-show="selfieCapture" id="image4" class="animated fadeIn" />
       <canvas
         v-show="selfieCapture"
         id="face-captured"
@@ -172,11 +173,13 @@ export default {
       document.querySelector('#start-capture-single').click()
       this.selfieCapture = true
       const image = document.querySelector('#image')
+      const img = document.querySelector('#image4')
       image.onload = function () {
         const c2 = document.getElementById('face-captured')
         const ctx2 = c2.getContext('2d')
         const image = document.querySelector('#image')
         ctx2.drawImage(image, 80, 90, 350, 450, 0, 0, c2.width, c2.height)
+        img.src = c2.toDataURL()
       }
       // setTimeout(() => {
       //   this.imgSrc = document.querySelector('#image').src
@@ -191,6 +194,8 @@ export default {
       //   lastModified: new Date().getTime(),
       //   type: 'image/jpeg',
       // })
+      // const c2 = document.getElementById('face-captured')
+      // this.imgSrc = c2.toDataURL()
       const blob = document.blob
       const file = new File([blob], 'selfie.jpg', {
         lastModified: new Date().getTime(),
