@@ -10,8 +10,8 @@
       ></video>
       <img v-show="false" id="image" class="animated fadeIn" />
 
-      <!-- <img v-show="selfieCapture" id="image" class="animated fadeIn" /> -->
-      <img v-show="selfieCapture" id="image4" class="animated fadeIn" />
+      <img v-show="selfieCapture" id="image" class="animated fadeIn" />
+      <img v-show="false" id="image4" class="animated fadeIn" />
       <canvas
         v-show="selfieCapture"
         id="face-captured"
@@ -178,7 +178,7 @@ export default {
         const c2 = document.getElementById('face-captured')
         const ctx2 = c2.getContext('2d')
         const image = document.querySelector('#image')
-        ctx2.drawImage(image, 80, 90, 350, 450, 0, 0, c2.width, c2.height)
+        ctx2.drawImage(image, 70, 90, 360, 450, 0, 0, c2.width, c2.height)
         img.src = c2.toDataURL()
       }
       // setTimeout(() => {
