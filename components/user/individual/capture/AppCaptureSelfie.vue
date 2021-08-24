@@ -190,14 +190,17 @@ export default {
       this.imgSrc = ''
       this.selfieCapture = false
     },
+    // dataURLtoFile(dataurl, filename) {
+    //   return new File([u8arr], filename, { type: mime })
+    // },
     async nextHandler() {
       const img = document.querySelector('#image4')
-      console.log(img.src, 'IMAGE SOURCE::::::')
-      const file = new File([img.src], 'selfie.jpg', {
+      const res = await fetch(img.src)
+      const blob = await res.blob()
+      const file = new File([blob], 'selfie.jpg', {
         lastModified: new Date().getTime(),
         type: 'image/jpeg',
       })
-      console.log(file, 'NEW FILE')
       // const blob = document.blob
       // const file = new File([blob], 'selfie.jpg', {
       //   lastModified: new Date().getTime(),
