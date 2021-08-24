@@ -177,7 +177,6 @@ export default {
       image.onload = function () {
         const c2 = document.getElementById('face-captured')
         const ctx2 = c2.getContext('2d')
-        const image = document.querySelector('#image')
         ctx2.drawImage(image, 70, 90, 360, 450, 0, 0, c2.width, c2.height)
         img.src = c2.toDataURL()
         img.width = c2.width
@@ -192,17 +191,18 @@ export default {
       this.selfieCapture = false
     },
     async nextHandler() {
-      // const file = new File([this.imgSrc], 'selfie.jpg', {
-      //   lastModified: new Date().getTime(),
-      //   type: 'image/jpeg',
-      // })
-      // const c2 = document.getElementById('face-captured')
-      // this.imgSrc = c2.toDataURL()
-      const blob = document.blob
-      const file = new File([blob], 'selfie.jpg', {
+      const img = document.querySelector('#image4')
+
+      const file = new File([img.src], 'selfie.jpg', {
         lastModified: new Date().getTime(),
         type: 'image/jpeg',
       })
+
+      // const blob = document.blob
+      // const file = new File([blob], 'selfie.jpg', {
+      //   lastModified: new Date().getTime(),
+      //   type: 'image/jpeg',
+      // })
 
       await this.$emit('submitCapturehandler', file)
       // this.$router.replace('/user/individual/upload-valid-id')
