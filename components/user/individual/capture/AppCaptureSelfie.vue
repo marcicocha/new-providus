@@ -192,12 +192,12 @@ export default {
     },
     async nextHandler() {
       const img = document.querySelector('#image4')
-
+      console.log(img.src, 'IMAGE SOURCE::::::')
       const file = new File([img.src], 'selfie.jpg', {
         lastModified: new Date().getTime(),
         type: 'image/jpeg',
       })
-
+      console.log(file, 'NEW FILE')
       // const blob = document.blob
       // const file = new File([blob], 'selfie.jpg', {
       //   lastModified: new Date().getTime(),
