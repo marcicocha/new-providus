@@ -199,7 +199,7 @@ export default {
       const blob = await res.blob()
       const file = new File([blob], 'selfie.jpg', {
         lastModified: new Date().getTime(),
-        type: 'image/jpeg',
+        type: 'image/png',
       })
       // const blob = document.blob
       // const file = new File([blob], 'selfie.jpg', {
