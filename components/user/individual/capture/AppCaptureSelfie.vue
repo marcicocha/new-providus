@@ -180,6 +180,8 @@ export default {
         const image = document.querySelector('#image')
         ctx2.drawImage(image, 70, 90, 360, 450, 0, 0, c2.width, c2.height)
         img.src = c2.toDataURL()
+        img.width = c2.width
+        img.height = c2.height
       }
       // setTimeout(() => {
       //   this.imgSrc = document.querySelector('#image').src
