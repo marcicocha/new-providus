@@ -179,7 +179,7 @@ export default {
         const c2 = document.getElementById('face-captured')
         const ctx2 = c2.getContext('2d')
         ctx2.drawImage(image, 60, 80, 360, 495, 0, 0, c2.width, c2.height)
-        img.src = c2.toDataURL()
+        img.src = c2.toDataURL('image/jpeg')
         img.width = c2.width
         img.height = c2.height
       }
@@ -198,11 +198,11 @@ export default {
       const img = document.querySelector('#image4')
       const res = await fetch(img.src)
       const blob = await res.blob()
-      const file = new File([blob], 'selfie.png', {
+      const file = new File([blob], 'selfie.jpg', {
         lastModified: new Date().getTime(),
-        type: 'image/png',
+        type: 'image/jpeg',
       })
-      console.log(file, 'FILE ')
+      alert(file, 'FILE')
       // const blob = document.blob
       // const file = new File([blob], 'selfie.jpg', {
       //   lastModified: new Date().getTime(),
