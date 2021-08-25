@@ -78,6 +78,7 @@ li:first-child {
   p {
     width: 85%;
     padding-left: 5px;
+    font-weight: bold;
   }
 }
 @media only screen and (max-width: 991px) {
