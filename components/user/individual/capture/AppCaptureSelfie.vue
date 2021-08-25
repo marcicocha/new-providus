@@ -265,7 +265,7 @@ select {
   transform: scaleX(-1);
   background: rgb(0, 0, 0);
   background: radial-gradient(
-    ellipse cover,
+    ellipse,
     rgba(0, 0, 0, 0.14754098360655743) 54%,
     rgba(0, 0, 0, 0.6222950819672132) 62%
   );
