@@ -251,7 +251,8 @@ select {
 }
 .canvas-2 {
   width: 100%;
-  height: 420px;
+
+  /* height: 420px; */
   transform: scaleX(-1);
 }
 .canvas {
