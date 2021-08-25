@@ -41,7 +41,8 @@ export default {
     captureInstructionHandler() {
       this.isCaptureInstruction = false
       this.isCapture = true
-      this.description = 'Stay still while taking selfie'
+      this.description =
+        'Stay still while taking selfie and ensure you face fit into the oval'
       this.counter++
       // 'Stay still and keep your face inside the oval while taking selfie'
     },
