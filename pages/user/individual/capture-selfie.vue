@@ -48,6 +48,7 @@ export default {
     },
     async submitCapturehandler(file) {
       try {
+        alert(file.name)
         this.formLoading = true
         const requestId = this.$cookies.get('requestId')
         const formData = new FormData()
