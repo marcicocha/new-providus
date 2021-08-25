@@ -16,7 +16,7 @@
         v-show="selfieCapture"
         id="face-captured"
         class="canvas-2 animated fadeIn"
-        height="420px"
+        height="400px"
       ></canvas>
       <canvas
         v-show="!selfieCapture"
