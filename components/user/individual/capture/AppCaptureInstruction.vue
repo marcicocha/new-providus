@@ -78,6 +78,7 @@ li:first-child {
   p {
     width: 85%;
     padding-left: 5px;
+    margin-bottom: 0;
     font-weight: bold;
   }
 }
