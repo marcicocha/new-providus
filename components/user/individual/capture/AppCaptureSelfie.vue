@@ -10,7 +10,7 @@
       ></video>
       <img v-show="false" id="image" class="animated fadeIn" />
 
-      <img v-show="selfieCapture" id="image" class="animated fadeIn" />
+      <!-- <img v-show="selfieCapture" id="image" class="animated fadeIn" /> -->
       <img v-show="false" id="image4" class="animated fadeIn" />
       <canvas
         v-show="selfieCapture"
