@@ -180,7 +180,6 @@ export default {
         const ctx2 = c2.getContext('2d')
         ctx2.drawImage(image, 60, 80, 360, 495, 0, 0, c2.width, c2.height)
         img.src = c2.toDataURL('image/jpeg')
-        alert(img.src)
         img.width = c2.width
         img.height = c2.height
       }
@@ -203,7 +202,6 @@ export default {
         lastModified: new Date().getTime(),
         type: 'image/jpeg',
       })
-      alert(file, 'FILE')
       // const blob = document.blob
       // const file = new File([blob], 'selfie.jpg', {
       //   lastModified: new Date().getTime(),
