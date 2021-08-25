@@ -176,9 +176,8 @@ export default {
       const img = document.querySelector('#image4')
       image.onload = function () {
         const c2 = document.getElementById('face-captured')
-        alert(c2.height)
         const ctx2 = c2.getContext('2d')
-        ctx2.drawImage(image, 60, 90, 360, 450, 0, 0, c2.width, c2.height)
+        ctx2.drawImage(image, 60, 90, 360, 450, 0, 0, c2.width, 300)
         img.src = c2.toDataURL()
         img.width = c2.width
         img.height = c2.height
