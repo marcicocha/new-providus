@@ -215,7 +215,6 @@ export default {
         base64Video: this.livenessCapture,
       }
       this.accountCreation = true
-      let errorMessage = 'Network Error'
       try {
         const { response } = await this.$axios.$post(
           '/individual/videoFaceEvaluation',
@@ -225,21 +224,22 @@ export default {
         this.$router.replace('/user/individual/weldone')
       } catch (err) {
         this.accountCreation = false
-        this.loadScript()
-        if (err && !err.response) {
-          errorMessage = String(err)
-          const customMessage =
-            'please click the start session button to try again'
-          notification.error({
-            message: errorMessage,
-            description: customMessage,
-          })
-          document.getElementById('videocontainer').style.opacity = '0.04'
-          document.getElementById('videocontainer').style.color = '#ed143d'
-          document.getElementById('instructions').innerHTML =
-            '3D-Liveness check failed. Please try again'
-          return
-        }
+        // let errorMessage = 'Network Error'
+
+        // if (err && !err.response) {
+        //   errorMessage = String(err)
+        //   const customMessage =
+        //     'please click the start session button to try again'
+        //   notification.error({
+        //     message: errorMessage,
+        //     description: customMessage,
+        //   })
+        //   document.getElementById('videocontainer').style.opacity = '0.04'
+        //   document.getElementById('videocontainer').style.color = '#ed143d'
+        //   document.getElementById('instructions').innerHTML =
+        //     '3D-Liveness check failed. Please try again'
+        //   return
+        // }
 
         const { default: errorHandler } = await import('@/utils/errorHandler')
         errorHandler(err).forEach((msg) => {
@@ -248,6 +248,8 @@ export default {
             description: msg,
           })
         })
+        this.loadScript()
+
         // // eslint-disable-next-line no-prototype-builtins
         // if (err && err.hasOwnProperty('response')) {
         //   const res = err.response
