@@ -236,26 +236,34 @@ export default {
             '3D-Liveness check failed. Please try again'
           return
         }
-        // eslint-disable-next-line no-prototype-builtins
-        if (err && err.hasOwnProperty('response')) {
-          const res = err.response
-          // eslint-disable-next-line no-prototype-builtins
-          if (res.hasOwnProperty('data')) {
-            errorMessage = res.data.errorMessage
-            if (!errorMessage) {
-              errorMessage =
-                'No response was received from the server...please try again'
-            }
-          } else {
-            errorMessage =
-              'No response was received from the server...please try again'
-          }
 
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
           notification.error({
             message: 'Error',
-            description: errorMessage,
+            description: msg,
           })
-        }
+        })
+        // // eslint-disable-next-line no-prototype-builtins
+        // if (err && err.hasOwnProperty('response')) {
+        //   const res = err.response
+        //   // eslint-disable-next-line no-prototype-builtins
+        //   if (res.hasOwnProperty('data')) {
+        //     errorMessage = res.data.errorMessage
+        //     if (!errorMessage) {
+        //       errorMessage =
+        //         'No response was received from the server...please try again'
+        //     }
+        //   } else {
+        //     errorMessage =
+        //       'No response was received from the server...please try again'
+        //   }
+
+        //   notification.error({
+        //     message: 'Error',
+        //     description: errorMessage,
+        //   })
+        // }
       }
     },
     ...mapActions({
