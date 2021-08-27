@@ -190,6 +190,8 @@ export default {
     returnHandler() {
       this.imgSrc = ''
       this.selfieCapture = false
+      this.unloadScript()
+      this.loadScript()
     },
     // dataURLtoFile(dataurl, filename) {
     //   return new File([u8arr], filename, { type: mime })

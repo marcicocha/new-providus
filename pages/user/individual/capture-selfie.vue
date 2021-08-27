@@ -63,7 +63,6 @@ export default {
         this.$router.replace('/user/individual/upload')
       } catch (err) {
         this.formLoading = false
-        this.counter++
         const { default: errorHandler } = await import('@/utils/errorHandler')
         errorHandler(err).forEach((msg) => {
           notification.error({
