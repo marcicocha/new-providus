@@ -248,8 +248,7 @@ export default {
             description: msg,
           })
         })
-        document.getElementById('videocontainer').style.opacity = '0.04'
-        document.getElementById('videocontainer').style.color = '#ed143d'
+
         document.getElementById('instructions').innerHTML =
           '3D-Liveness check failed. Please try again'
         document.getElementById('instructions_on_face').innerHTML = 'Try again'
