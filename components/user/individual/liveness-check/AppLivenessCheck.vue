@@ -122,81 +122,85 @@ export default {
       }
     },
   },
-  async mounted() {
-    try {
-      this.loading = false
-      this.$loadScript(
-        'https://webrtc.github.io/adapter/adapter-latest.js'
-      ).then(() => {
-        this.loading = false
-        this.$loadScript('/daon/daon.js').then(() => {
-          this.$loadScript('/daon/3dfl/labels.js').then(() => {
-            this.$loadScript('/daon/3dfl/Daon.FaceLiveness3D.min.js').then(
-              () => {
-                this.$loadScript('/daon/3dfl/animation.js').then(() => {
-                  this.$loadScript('/daon/3dfl/ui.js').then(() => {
-                    this.$loadScript('/daon/3dfl/3dflClient_withlib.js').then(
-                      () => {
-                        setTimeout(() => {
-                          const el = document.querySelector('#liveness-result')
-                          el.addEventListener('click', this.getLivenessResult)
-                        }, 1500)
-                      }
-                    )
-                  })
-                })
-              }
-            )
-          })
-        })
-      })
-    } catch (err) {
-      // Failed to fetch script
-      this.loading = false
-      const { default: errorHandler } = await import('@/utils/errorHandler')
-      errorHandler(err).forEach((msg) => {
-        notification.error({
-          message: 'Error',
-          description: msg,
-        })
-      })
-      // let errorMessage = 'Network Error'
-      // Error Message from Backend
-      // if (err && !err.response) {
-      //   errorMessage = String(err)
-      //   this.$toast.open({
-      //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
-      //     type: 'error',
-      //
-      //     dismissible: true,
-      //   })
-      //   return
-      // }
-      // eslint-disable-next-line no-prototype-builtins
-      // if (err && err.hasOwnProperty('response')) {
-      //   const res = err.response
-      //   // eslint-disable-next-line no-prototype-builtins
-      //   if (res.hasOwnProperty('data')) {
-      //     errorMessage = res.data.errorMessage
-      //     if (!errorMessage) {
-      //       errorMessage =
-      //         'No response was received from the server...please try again'
-      //     }
-      //   } else {
-      //     errorMessage =
-      //       'No response was received from the server...please try again'
-      //   }
-
-      //   this.$toast.open({
-      //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
-      //     type: 'error',
-      //
-      //     dismissible: true,
-      //   })
-      // }
-    }
+  mounted() {
+    this.loadScript()
   },
   methods: {
+    async loadScript() {
+      try {
+        this.loading = false
+        this.$loadScript(
+          'https://webrtc.github.io/adapter/adapter-latest.js'
+        ).then(() => {
+          this.loading = false
+          this.$loadScript('/daon/daon.js').then(() => {
+            this.$loadScript('/daon/3dfl/labels.js').then(() => {
+              this.$loadScript('/daon/3dfl/Daon.FaceLiveness3D.min.js').then(
+                () => {
+                  this.$loadScript('/daon/3dfl/animation.js').then(() => {
+                    this.$loadScript('/daon/3dfl/ui.js').then(() => {
+                      this.$loadScript('/daon/3dfl/3dflClient_withlib.js').then(
+                        () => {
+                          setTimeout(() => {
+                            const el =
+                              document.querySelector('#liveness-result')
+                            el.addEventListener('click', this.getLivenessResult)
+                          }, 1500)
+                        }
+                      )
+                    })
+                  })
+                }
+              )
+            })
+          })
+        })
+      } catch (err) {
+        // Failed to fetch script
+        this.loading = false
+        const { default: errorHandler } = await import('@/utils/errorHandler')
+        errorHandler(err).forEach((msg) => {
+          notification.error({
+            message: 'Error',
+            description: msg,
+          })
+        })
+        // let errorMessage = 'Network Error'
+        // Error Message from Backend
+        // if (err && !err.response) {
+        //   errorMessage = String(err)
+        //   this.$toast.open({
+        //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
+        //     type: 'error',
+        //
+        //     dismissible: true,
+        //   })
+        //   return
+        // }
+        // eslint-disable-next-line no-prototype-builtins
+        // if (err && err.hasOwnProperty('response')) {
+        //   const res = err.response
+        //   // eslint-disable-next-line no-prototype-builtins
+        //   if (res.hasOwnProperty('data')) {
+        //     errorMessage = res.data.errorMessage
+        //     if (!errorMessage) {
+        //       errorMessage =
+        //         'No response was received from the server...please try again'
+        //     }
+        //   } else {
+        //     errorMessage =
+        //       'No response was received from the server...please try again'
+        //   }
+
+        //   this.$toast.open({
+        //     message: `<p class="toast-msg"> ${errorMessage} </p>`,
+        //     type: 'error',
+        //
+        //     dismissible: true,
+        //   })
+        // }
+      }
+    },
     livenessCheckHandler() {
       document.getElementById('videocontainer').style.opacity = '1'
       document.getElementById('videocontainer').style.color = '#000000'
@@ -221,7 +225,7 @@ export default {
         this.$router.replace('/user/individual/weldone')
       } catch (err) {
         this.accountCreation = false
-
+        this.loadScript()
         if (err && !err.response) {
           errorMessage = String(err)
           const customMessage =
@@ -325,12 +329,12 @@ select {
   border: none !important;
   padding: 2px;
   width: 50%;
-  min-width: calc(var(--cam-width) + 30px);
+  min-width: calc(var(--cam-width) + 0);
 }
 
 #videocontainer {
   position: relative;
-  width: calc(var(--cam-width) + 2px);
+  width: calc(var(--cam-width) + 0);
   height: calc(var(--cam-height) + 2px);
   margin: 0 auto;
   background: transparent !important;
