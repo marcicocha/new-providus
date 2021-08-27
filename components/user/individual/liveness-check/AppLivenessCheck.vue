@@ -252,6 +252,7 @@ export default {
         document.getElementById('videocontainer').style.color = '#ed143d'
         document.getElementById('instructions').innerHTML =
           '3D-Liveness check failed. Please try again'
+        document.getElementById('instructions_on_face').innerHTML = 'Try again'
         this.loadScript()
 
         // // eslint-disable-next-line no-prototype-builtins
