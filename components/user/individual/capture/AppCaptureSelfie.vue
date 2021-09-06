@@ -257,7 +257,7 @@ select {
   float: left;
 }
 .canvas-2 {
-  width: 100%;
+  /* width: 100%; */
 
   /* height: 420px; */
   transform: scaleX(-1);
