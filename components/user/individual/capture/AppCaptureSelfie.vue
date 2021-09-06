@@ -11,9 +11,9 @@
       <img v-show="false" id="image" class="animated fadeIn" />
 
       <!-- <img v-show="selfieCapture" id="image" class="animated fadeIn" /> -->
-      <img v-show="false" id="image4" class="animated fadeIn" />
+      <img v-show="selfieCapture" id="image4" class="animated fadeIn" />
       <canvas
-        v-show="selfieCapture"
+        v-show="false"
         id="face-captured"
         class="canvas-2 animated fadeIn"
         width="640px"
@@ -181,8 +181,6 @@ export default {
         const ctx2 = c2.getContext('2d')
         ctx2.drawImage(image, 60, 70, 360, 495, 0, 0, c2.width, c2.height)
         img.src = c2.toDataURL('image/jpeg')
-        img.width = '640px'
-        img.height = '480px'
       }
       // setTimeout(() => {
       //   this.imgSrc = document.querySelector('#image').src
@@ -246,6 +244,11 @@ pre {
   position: absolute;
   top: 0;
   left: 0;
+}
+#id {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
 }
 select {
   display: inline-block;
