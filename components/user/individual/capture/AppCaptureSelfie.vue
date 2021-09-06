@@ -180,6 +180,7 @@ export default {
         const c2 = document.getElementById('face-captured')
         const ctx2 = c2.getContext('2d')
         ctx2.fillStyle = 'white'
+        ctx2.fillRect(0, 0, 640, 480)
         ctx2.drawImage(image, 60, 80, 360, 495, 170, 40, 300, 400)
         img.src = c2.toDataURL('image/jpeg')
       }
