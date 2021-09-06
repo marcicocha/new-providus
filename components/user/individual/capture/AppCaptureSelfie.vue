@@ -183,7 +183,7 @@ export default {
       image.onload = function () {
         const c2 = document.getElementById('face-captured')
         const ctx2 = c2.getContext('2d')
-        ctx2.drawImage(image, 60, 80, 360, 495, 0, 0, 640, 480)
+        ctx2.drawImage(image, 60, 80, 360, 495, 0, 0, c2.width, c2.height)
         img.src = c2.toDataURL('image/jpeg')
         img.width = '640px'
         img.height = '480px'
@@ -257,7 +257,7 @@ select {
   float: left;
 }
 .canvas-2 {
-  /* width: 100%; */
+  width: 100%;
 
   /* height: 420px; */
   transform: scaleX(-1);
