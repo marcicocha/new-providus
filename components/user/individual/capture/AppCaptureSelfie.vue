@@ -11,17 +11,13 @@
       <img v-show="false" id="image" class="animated fadeIn" />
 
       <!-- <img v-show="selfieCapture" id="image" class="animated fadeIn" /> -->
-      <img
-        v-show="false"
-        id="image4"
-        class="animated fadeIn"
-        intrinsicsize="640 x 480"
-      />
+      <img v-show="false" id="image4" class="animated fadeIn" />
       <canvas
         v-show="selfieCapture"
         id="face-captured"
         class="canvas-2 animated fadeIn"
-        height="400px"
+        width="640px"
+        height="480px"
       ></canvas>
       <canvas
         v-show="!selfieCapture"
@@ -257,9 +253,8 @@ select {
   float: left;
 }
 .canvas-2 {
-  width: 100%;
-
-  /* height: 420px; */
+  width: 640px;
+  height: 480px;
   transform: scaleX(-1);
 }
 .canvas {
