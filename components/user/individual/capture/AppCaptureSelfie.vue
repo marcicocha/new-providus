@@ -269,7 +269,7 @@ select {
   left: 0;
   z-index: 5;
   transform: scaleX(-1);
-  background: rgb(0, 0, 0);
+  background: white;
   background: radial-gradient(
     ellipse,
     rgba(0, 0, 0, 0.14754098360655743) 54%,
