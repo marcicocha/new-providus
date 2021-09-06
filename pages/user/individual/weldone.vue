@@ -37,8 +37,8 @@
   </div>
 </template>
 <script>
-import AppButton from '@/components/UI/AppButton'
 import { mapState } from 'vuex'
+import AppButton from '@/components/UI/AppButton'
 export default {
   components: {
     AppButton,

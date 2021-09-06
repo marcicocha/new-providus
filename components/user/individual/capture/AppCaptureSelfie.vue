@@ -219,7 +219,7 @@ export default {
   },
 }
 </script>
-<style lang="scss" scoped>
+<style scoped>
 .container {
   margin: 0 auto;
   position: relative;
@@ -251,7 +251,7 @@ pre {
   width: 100%;
   height: 420px;
   object-fit: cover;
-  border: 1px solid $primary;
+  border: 1px solid #fdb813;
 }
 select {
   display: inline-block;

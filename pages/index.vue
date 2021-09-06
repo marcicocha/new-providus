@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import AppTitleComponent from '@/components/UI/AppTitleComponent'
 import { isBrowser } from 'browser-or-node'
+import AppTitleComponent from '@/components/UI/AppTitleComponent'
 export default {
   components: {
     AppTitleComponent,

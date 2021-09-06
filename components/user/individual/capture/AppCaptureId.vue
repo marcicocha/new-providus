@@ -62,8 +62,8 @@
 </template>
 <script>
 import { mapActions } from 'vuex'
-import AppButton from '@/components/UI/AppButton'
 import { notification, Row, Col } from 'ant-design-vue'
+import AppButton from '@/components/UI/AppButton'
 export default {
   name: 'AppCaptureId',
   components: {
