@@ -259,6 +259,7 @@ select {
   width: 640px;
   height: 480px;
   transform: scaleX(-1);
+  background: white;
 }
 .canvas {
   width: 100%;
